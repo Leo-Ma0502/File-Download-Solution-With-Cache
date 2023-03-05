@@ -8,19 +8,19 @@
     "net7.0-windows7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\yehengma\\.nuget\\packages\\": {}
+    "C:\\Users\\Dun\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\yehengma\\source\\repos\\FileDownloadWithCache\\FileDownloadRequest\\FileDownloadRequest.csproj",
+      "projectUniqueName": "C:\\Users\\Dun\\Source\\Repos\\File-Download-Solution-With-Cache\\FileDownloadWithCache\\FileDownloadRequest\\FileDownloadRequest.csproj",
       "projectName": "FileDownloadRequest",
-      "projectPath": "C:\\Users\\yehengma\\source\\repos\\FileDownloadWithCache\\FileDownloadRequest\\FileDownloadRequest.csproj",
-      "packagesPath": "C:\\Users\\yehengma\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\yehengma\\source\\repos\\FileDownloadWithCache\\FileDownloadRequest\\obj\\",
+      "projectPath": "C:\\Users\\Dun\\Source\\Repos\\File-Download-Solution-With-Cache\\FileDownloadWithCache\\FileDownloadRequest\\FileDownloadRequest.csproj",
+      "packagesPath": "C:\\Users\\Dun\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Dun\\Source\\Repos\\File-Download-Solution-With-Cache\\FileDownloadWithCache\\FileDownloadRequest\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\yehengma\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Dun\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\yehengma\\source\\repos\\FileDownloadWithCache\\CacheServer\\CacheServer.csproj": {}
+    "C:\\Users\\Dun\\source\\repos\\File-Download-Solution-With-Cache\\FileDownloadWithCache\\CacheServer\\CacheServer.csproj": {}
   },
   "projects": {
-    "C:\\Users\\yehengma\\source\\repos\\FileDownloadWithCache\\CacheServer\\CacheServer.csproj": {
+    "C:\\Users\\Dun\\source\\repos\\File-Download-Solution-With-Cache\\FileDownloadWithCache\\CacheServer\\CacheServer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\yehengma\\source\\repos\\FileDownloadWithCache\\CacheServer\\CacheServer.csproj",
+        "projectUniqueName": "C:\\Users\\Dun\\source\\repos\\File-Download-Solution-With-Cache\\FileDownloadWithCache\\CacheServer\\CacheServer.csproj",
         "projectName": "CacheServer",
-        "projectPath": "C:\\Users\\yehengma\\source\\repos\\FileDownloadWithCache\\CacheServer\\CacheServer.csproj",
-        "packagesPath": "C:\\Users\\yehengma\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\yehengma\\source\\repos\\FileDownloadWithCache\\CacheServer\\obj\\",
+        "projectPath": "C:\\Users\\Dun\\source\\repos\\File-Download-Solution-With-Cache\\FileDownloadWithCache\\CacheServer\\CacheServer.csproj",
+        "packagesPath": "C:\\Users\\Dun\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Dun\\Source\\Repos\\File-Download-Solution-With-Cache\\FileDownloadWithCache\\CacheServer\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\yehengma\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Dun\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
