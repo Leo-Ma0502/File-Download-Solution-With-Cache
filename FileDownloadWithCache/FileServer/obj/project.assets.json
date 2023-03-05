@@ -1,11 +1,11 @@
 {
   "version": 3,
   "targets": {
-    "net7.0-windows7.0": {}
+    "net7.0": {}
   },
   "libraries": {},
   "projectFileDependencyGroups": {
-    "net7.0-windows7.0": []
+    "net7.0": []
   },
   "packageFolders": {
     "C:\\Users\\Dun\\.nuget\\packages\\": {}
@@ -13,26 +13,26 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Dun\\source\\repos\\File-Download-Solution-With-Cache\\FileDownloadWithCache\\FileDownloadRequest\\FileDownloadRequest.csproj",
-      "projectName": "FileDownloadRequest",
-      "projectPath": "C:\\Users\\Dun\\source\\repos\\File-Download-Solution-With-Cache\\FileDownloadWithCache\\FileDownloadRequest\\FileDownloadRequest.csproj",
+      "projectUniqueName": "C:\\Users\\Dun\\source\\repos\\File-Download-Solution-With-Cache\\FileDownloadWithCache\\FileServer\\FileServer.csproj",
+      "projectName": "FileServer",
+      "projectPath": "C:\\Users\\Dun\\source\\repos\\File-Download-Solution-With-Cache\\FileDownloadWithCache\\FileServer\\FileServer.csproj",
       "packagesPath": "C:\\Users\\Dun\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Dun\\source\\repos\\File-Download-Solution-With-Cache\\FileDownloadWithCache\\FileDownloadRequest\\obj\\",
+      "outputPath": "C:\\Users\\Dun\\source\\repos\\File-Download-Solution-With-Cache\\FileDownloadWithCache\\FileServer\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Dun\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
-        "net7.0-windows"
+        "net7.0"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "net7.0-windows7.0": {
-          "targetAlias": "net7.0-windows",
+        "net7.0": {
+          "targetAlias": "net7.0",
           "projectReferences": {}
         }
       },
@@ -43,8 +43,8 @@
       }
     },
     "frameworks": {
-      "net7.0-windows7.0": {
-        "targetAlias": "net7.0-windows",
+      "net7.0": {
+        "targetAlias": "net7.0",
         "imports": [
           "net461",
           "net462",
@@ -59,9 +59,6 @@
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
-          },
-          "Microsoft.WindowsDesktop.App.WindowsForms": {
-            "privateAssets": "none"
           }
         },
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"

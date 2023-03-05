@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Dun\\source\\repos\\File-Download-Solution-With-Cache\\FileDownloadWithCache\\FileDownloadRequest\\FileDownloadRequest.csproj",
-      "projectName": "FileDownloadRequest",
-      "projectPath": "C:\\Users\\Dun\\source\\repos\\File-Download-Solution-With-Cache\\FileDownloadWithCache\\FileDownloadRequest\\FileDownloadRequest.csproj",
+      "projectUniqueName": "C:\\Users\\Dun\\source\\repos\\File-Download-Solution-With-Cache\\FileDownloadWithCache\\Client\\Client.csproj",
+      "projectName": "Client",
+      "projectPath": "C:\\Users\\Dun\\source\\repos\\File-Download-Solution-With-Cache\\FileDownloadWithCache\\Client\\Client.csproj",
       "packagesPath": "C:\\Users\\Dun\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Dun\\source\\repos\\File-Download-Solution-With-Cache\\FileDownloadWithCache\\FileDownloadRequest\\obj\\",
+      "outputPath": "C:\\Users\\Dun\\source\\repos\\File-Download-Solution-With-Cache\\FileDownloadWithCache\\Client\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Dun\\AppData\\Roaming\\NuGet\\NuGet.Config",
