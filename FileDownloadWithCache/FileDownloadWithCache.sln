@@ -4,10 +4,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.5.33424.131
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "Client\Client.csproj", "{3EB53328-7B76-49FC-AD02-50F5BFF1E87C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C66A91EC-6689-489C-B620-21C10579F97C} = {C66A91EC-6689-489C-B620-21C10579F97C}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CacheServer", "CacheServer\CacheServer.csproj", "{48EB5484-F261-406A-B7F7-771052645C4C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CacheServer", "CacheServer\CacheServer.csproj", "{48EB5484-F261-406A-B7F7-771052645C4C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileServer", "FileServer\FileServer.csproj", "{C66A91EC-6689-489C-B620-21C10579F97C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileServer", "FileServer\FileServer.csproj", "{C66A91EC-6689-489C-B620-21C10579F97C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

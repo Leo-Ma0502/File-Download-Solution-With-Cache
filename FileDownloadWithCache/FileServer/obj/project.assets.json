@@ -8,19 +8,19 @@
     "net7.0-windows7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Leo\\.nuget\\packages\\": {}
+    "C:\\Users\\yehengma\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Leo\\source\\repos\\File-Download-Solution-With-Cache\\FileDownloadWithCache\\FileServer\\FileServer.csproj",
+      "projectUniqueName": "C:\\Users\\yehengma\\Source\\Repos\\Leo-Ma0502\\File-Download-Solution-With-Cache\\FileDownloadWithCache\\FileServer\\FileServer.csproj",
       "projectName": "FileServer",
-      "projectPath": "C:\\Users\\Leo\\source\\repos\\File-Download-Solution-With-Cache\\FileDownloadWithCache\\FileServer\\FileServer.csproj",
-      "packagesPath": "C:\\Users\\Leo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Leo\\source\\repos\\File-Download-Solution-With-Cache\\FileDownloadWithCache\\FileServer\\obj\\",
+      "projectPath": "C:\\Users\\yehengma\\Source\\Repos\\Leo-Ma0502\\File-Download-Solution-With-Cache\\FileDownloadWithCache\\FileServer\\FileServer.csproj",
+      "packagesPath": "C:\\Users\\yehengma\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\yehengma\\Source\\Repos\\Leo-Ma0502\\File-Download-Solution-With-Cache\\FileDownloadWithCache\\FileServer\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Leo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\yehengma\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

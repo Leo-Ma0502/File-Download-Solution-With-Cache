@@ -1,0 +1,17 @@
+C:\Users\yehengma\Source\Repos\Leo-Ma0502\File-Download-Solution-With-Cache\FileDownloadWithCache\FileServer\bin\Debug\net7.0-windows\FileServer.exe
+C:\Users\yehengma\Source\Repos\Leo-Ma0502\File-Download-Solution-With-Cache\FileDownloadWithCache\FileServer\bin\Debug\net7.0-windows\FileServer.deps.json
+C:\Users\yehengma\Source\Repos\Leo-Ma0502\File-Download-Solution-With-Cache\FileDownloadWithCache\FileServer\bin\Debug\net7.0-windows\FileServer.runtimeconfig.json
+C:\Users\yehengma\Source\Repos\Leo-Ma0502\File-Download-Solution-With-Cache\FileDownloadWithCache\FileServer\bin\Debug\net7.0-windows\FileServer.dll
+C:\Users\yehengma\Source\Repos\Leo-Ma0502\File-Download-Solution-With-Cache\FileDownloadWithCache\FileServer\bin\Debug\net7.0-windows\FileServer.pdb
+C:\Users\yehengma\Source\Repos\Leo-Ma0502\File-Download-Solution-With-Cache\FileDownloadWithCache\FileServer\obj\Debug\net7.0-windows\FileServer.csproj.AssemblyReference.cache
+C:\Users\yehengma\Source\Repos\Leo-Ma0502\File-Download-Solution-With-Cache\FileDownloadWithCache\FileServer\obj\Debug\net7.0-windows\FileServer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\yehengma\Source\Repos\Leo-Ma0502\File-Download-Solution-With-Cache\FileDownloadWithCache\FileServer\obj\Debug\net7.0-windows\FileServer.AssemblyInfoInputs.cache
+C:\Users\yehengma\Source\Repos\Leo-Ma0502\File-Download-Solution-With-Cache\FileDownloadWithCache\FileServer\obj\Debug\net7.0-windows\FileServer.AssemblyInfo.cs
+C:\Users\yehengma\Source\Repos\Leo-Ma0502\File-Download-Solution-With-Cache\FileDownloadWithCache\FileServer\obj\Debug\net7.0-windows\FileServer.csproj.CoreCompileInputs.cache
+C:\Users\yehengma\Source\Repos\Leo-Ma0502\File-Download-Solution-With-Cache\FileDownloadWithCache\FileServer\obj\Debug\net7.0-windows\FileServer.dll
+C:\Users\yehengma\Source\Repos\Leo-Ma0502\File-Download-Solution-With-Cache\FileDownloadWithCache\FileServer\obj\Debug\net7.0-windows\refint\FileServer.dll
+C:\Users\yehengma\Source\Repos\Leo-Ma0502\File-Download-Solution-With-Cache\FileDownloadWithCache\FileServer\obj\Debug\net7.0-windows\FileServer.pdb
+C:\Users\yehengma\Source\Repos\Leo-Ma0502\File-Download-Solution-With-Cache\FileDownloadWithCache\FileServer\obj\Debug\net7.0-windows\FileServer.genruntimeconfig.cache
+C:\Users\yehengma\Source\Repos\Leo-Ma0502\File-Download-Solution-With-Cache\FileDownloadWithCache\FileServer\obj\Debug\net7.0-windows\ref\FileServer.dll
+C:\Users\yehengma\Source\Repos\Leo-Ma0502\File-Download-Solution-With-Cache\FileDownloadWithCache\FileServer\obj\Debug\net7.0-windows\FileServer.FileServer.resources
+C:\Users\yehengma\Source\Repos\Leo-Ma0502\File-Download-Solution-With-Cache\FileDownloadWithCache\FileServer\obj\Debug\net7.0-windows\FileServer.csproj.GenerateResource.cache
