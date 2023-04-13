@@ -13,8 +13,12 @@ namespace Client
             InitializeComponent();
             main();
         }
+        /*TODO 
+         * initiate and maintain a dictionary(hash, block)
+         * link blocks together and save as image file       
+         */
         TcpClient client;
-        private void main()
+        public void main()
         {
             // IP Address to listen on. Loopback is the localhost
             IPAddress ipAddr = IPAddress.Loopback;
@@ -23,37 +27,53 @@ namespace Client
             // the names of the files that we ask the server to read
             var files = new List<string>();
             files.Add("test1.bmp");
-            files.Add("test2.bmp");
+         /*   files.Add("test2.bmp");*/
 
             try
             {
                 Greeting(ipAddr, port);
-                foreach(string fileName in files)
+                /*foreach(string fileName in files)
                 {
                     Request(ipAddr, port, fileName);
-                }
+                }*/
                 
             }
             catch (Exception e) { Console.WriteLine(e.Message); }
         }
 
-        // greeting to server
+        // greeting
         private void Greeting(IPAddress ipAddr, int port)
         {
-            Console.WriteLine("start client");
-            Console.WriteLine("connected to server");
+            Console.WriteLine("start client at {0}", DateTime.Now.TimeOfDay);
             client = new(ipAddr.ToString(), port);
+            Console.WriteLine("Connected to cache");
             byte command = 0;
             using (NetworkStream stream = client.GetStream())
             {
+                Console.WriteLine("send greeting at {0}", DateTime.Now.TimeOfDay);
                 stream.WriteByte(command);
                 stream.Flush();
-
-                // get greeting message from the server
-                StreamReader reader = new StreamReader(stream, Encoding.UTF8);
+                // end session first
+                // get greeting message from the cache
+                Console.WriteLine("read response at {0}", DateTime.Now.TimeOfDay);
+                StreamReader reader = new(stream, Encoding.UTF8);
+                Console.WriteLine("got response at {0}", DateTime.Now.TimeOfDay);              
+                try
+                {
+                    string response = reader.ReadLine();
+                    Console.WriteLine("Client received string: " + response);
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                /*// get greeting message from the cache
+                Console.WriteLine("read response");
+                StreamReader reader = new(stream, Encoding.UTF8);
+                Console.WriteLine("got response");
                 string response = reader.ReadLine();
 
-                Console.WriteLine("Received string: " + response);
+                Console.WriteLine("Client received string: " + response);*/
             }
 
         }

@@ -1,6 +1,8 @@
 using System.Net.Sockets;
 using System.Net;
 using System.Text;
+using System.Collections.Generic;
+using System.IO;
 
 namespace FileServer;
 
@@ -11,28 +13,31 @@ public partial class FileServer : Form
         InitializeComponent();
         main();
     }
-
-    private void main()
+    public void main()
     {
-        Console.WriteLine("Server starting !");
-
         // IP Address to listen on. Loopback is the localhost
         IPAddress ipAddr = IPAddress.Loopback;
 
         // Port to listen on
-        int port = 8081;
+        int port = 8082;
 
         // Create and start a listener for client connection
-        TcpListener listener = new TcpListener(ipAddr, port);
+        TcpListener listener = new(ipAddr, port);
         listener.Start();
-
-        Console.WriteLine("Server listening on: {0}:{1}", ipAddr, port);
-
+        /*        Dictionary<int, string> resFromCache = cacheServer.FetchFile();
+                foreach (KeyValuePair<int, string> kvp in resFromCache)
+                {
+                    Console.WriteLine("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
+                }
+                Console.WriteLine("Server starting !");*/
+        /*Cache cacheServer = new();
+        cacheServer.HandleRequest();*/
         // keep running
         while (true)
         {
+            Console.WriteLine("Server listening on: {0}:{1} at {2}", ipAddr, port, DateTime.Now.TimeOfDay);
             var client = listener.AcceptTcpClient();
-            Console.WriteLine("client connected");
+            Console.WriteLine("cache connected at {0}", DateTime.Now.TimeOfDay);
 
             // NetworkStream object is used for passing data between client and server
             NetworkStream stream = client.GetStream();
@@ -58,23 +63,12 @@ public partial class FileServer : Form
             }
             else  // command for a image file
             {
-                // the four bytes following the command is the number of bytes storing the file name
-                byte[] data = new byte[4];
-                stream.Read(data, 0, 4); // read bytes from the stream into the buffer
-
-                // find out the length of the file name and read the bytes representing the file name
-                int fileNameBytesLength = BitConverter.ToInt32(data, 0);
-                data = new byte[fileNameBytesLength];
-                stream.Read(data, 0, fileNameBytesLength);
-
-                // get the path to the file
-                string fileName = Encoding.UTF8.GetString(data);
-                Console.WriteLine("received filename:" + fileName);
-                string URL = string.Format(".\\asset\\{0}", fileName);
-                Console.WriteLine("url: " + URL);
+                Console.WriteLine("waiting");
+                /*Cache cacheServer = new();
+                string URL = cacheServer.FetchFile();
 
                 // StreamWriter object is used to send data to the client
-                StreamWriter writer = new StreamWriter(stream);
+                StreamWriter writer = new(stream);
 
                 using (Image image = Image.FromFile(URL))
                 {
@@ -93,7 +87,7 @@ public partial class FileServer : Form
                 }
                 writer.Flush(); // ask the system send the data now
                 writer.Close();
-                stream.Close();
+                stream.Close();*/
             }
             client.Close();
         }
