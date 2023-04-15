@@ -3,6 +3,9 @@ using System.Net;
 using System.Text;
 using System.Drawing;
 using System.Windows.Forms.Design;
+using System.IO;
+using System.Buffers.Text;
+using System.CodeDom.Compiler;
 
 namespace Client
 {
@@ -32,6 +35,7 @@ namespace Client
             try
             {
                 Greeting(ipAddr, port);
+                Request(ipAddr, port, "test1.bmp");
                 /*foreach(string fileName in files)
                 {
                     Request(ipAddr, port, fileName);
@@ -46,36 +50,50 @@ namespace Client
         {
             Console.WriteLine("start client at {0}", DateTime.Now.TimeOfDay);
             client = new(ipAddr.ToString(), port);
-            Console.WriteLine("Connected to cache");
+
             byte command = 0;
-            using (NetworkStream stream = client.GetStream())
+            using NetworkStream stream = client.GetStream();
+            Console.WriteLine("send greeting at {0}", DateTime.Now.TimeOfDay);
+            stream.WriteByte(command);
+            stream.Flush();
+            // end session first
+            // get greeting message from the cache
+
+            /* while (true)
+             {
+                 client.Close();
+                 StreamReader reader = new(stream, Encoding.UTF8);
+
+                 // get greeting message from the cache
+                 string response = reader.ReadLine();
+                 Console.WriteLine("got response: {1} at {0}", DateTime.Now.TimeOfDay, response);
+             }
+ */
+            StreamReader reader = new(stream, Encoding.UTF8);
+
+            // get greeting message from the cache
+            /*string response=reader.ReadLine();*/
+          
+            
+            string response = reader.ReadLine();
+            Console.WriteLine("got response: {1} at {0}", DateTime.Now.TimeOfDay, response);
+            
+            
+
+            /*TcpListener listenFromCache = new(ipAddr, 8083);
+            listenFromCache.Start();
+            while (true)
             {
-                Console.WriteLine("send greeting at {0}", DateTime.Now.TimeOfDay);
-                stream.WriteByte(command);
-                stream.Flush();
-                // end session first
-                // get greeting message from the cache
-                Console.WriteLine("read response at {0}", DateTime.Now.TimeOfDay);
-                StreamReader reader = new(stream, Encoding.UTF8);
-                Console.WriteLine("got response at {0}", DateTime.Now.TimeOfDay);              
-                try
-                {
-                    string response = reader.ReadLine();
-                    Console.WriteLine("Client received string: " + response);
-                }
-                catch(Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                }
-                /*// get greeting message from the cache
-                Console.WriteLine("read response");
-                StreamReader reader = new(stream, Encoding.UTF8);
-                Console.WriteLine("got response");
-                string response = reader.ReadLine();
+                Console.WriteLine("Client waiting for response");
+                using NetworkStream streamFromCache = listenFromCache.AcceptTcpClient().GetStream();
+                Console.WriteLine("fuck 711");
+                StreamReader readFromCache = new(streamFromCache, Encoding.UTF8);
+                Console.WriteLine("fuck 7111");
+                string response = readFromCache.ReadLine();
+                Console.WriteLine("fuck71111");
+                Console.WriteLine("got response: {1} at {0}", DateTime.Now.TimeOfDay, response);
 
-                Console.WriteLine("Client received string: " + response);*/
-            }
-
+            }*/
         }
 
         // requesting file download
@@ -107,20 +125,35 @@ namespace Client
                 // the StreamReader object is used to receive reply from the server
                 StreamReader reader = new(stream);
 
-                string imageData;
-
-                // print out the contents of the file received from the server
-                while ((imageData = reader.ReadLine()) != null)
+                List<byte[]> imageData = new();
+                string blockData;
+                /*byte[] imageByte = Array.Empty<byte>();*/
+                Image image;
+                /*while ((blockData = reader.ReadLine()) != null)
                 {
-                    Console.WriteLine(imageData);
-                    byte[] imageBytes = Convert.FromBase64String(imageData);
-                    Image image;
-                    MemoryStream ms = new(imageBytes, 0, imageBytes.Length);
-                    image = Image.FromStream(ms);
-                    image.Save(string.Format(".\\asset\\{0}", fileName));
-                    Console.WriteLine(string.Format("----- Saved {0} -----", fileName));
+                    blockData = reader.ReadLine(); //test
+                    byte[] temp = Encoding.UTF8.GetBytes(blockData);
+                    imageByte = new byte[temp.Length];
+                    Array.Copy(temp, imageByte, temp.Length);
+                }*/
+                // print out the contents of the file received from the server
+                while ((blockData = reader.ReadLine()) != null)
+                {
+                    /*imageData.Add(Encoding.UTF8.GetBytes(blockData));*/
+                    blockData = blockData.Replace("=", "+").Trim();
+                    Console.WriteLine(blockData);
+                    imageData.Add(Convert.FromBase64String(blockData));
                 }
 
+                /*string imageDataString = String.Join("", imageData);*/
+                /*string imageDataString = imageData[^1];*/
+                /*byte[] imageByte = Encoding.UTF8.GetBytes(imageDataString);*/
+                byte[] imageByte = imageData.SelectMany(bytes => bytes).ToArray();
+                /*byte[] imageByte = imageData[^1];*/
+                MemoryStream ms = new(imageByte, 0, imageByte.Length);
+                image = Image.FromStream(ms);
+                image.Save(string.Format(".\\asset\\{0}", fileName));
+                Console.WriteLine(string.Format("----- Saved {0} -----", fileName));
                 reader.Close();
                 stream.Close();
                 client.Close();

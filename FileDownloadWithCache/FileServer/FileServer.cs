@@ -3,6 +3,8 @@ using System.Net;
 using System.Text;
 using System.Collections.Generic;
 using System.IO;
+using System.Diagnostics;
+using System.Buffers.Text;
 
 namespace FileServer;
 
@@ -12,16 +14,22 @@ public partial class FileServer : Form
     {
         InitializeComponent();
         main();
+        /*using Image test1 = Image.FromFile(".\\asset\\test1.bmp");
+        MemoryStream ms_1 = new();
+        test1.Save(ms_1, test1.RawFormat);
+        byte[] b1 = ms_1.ToArray();
+
+        var blocks = getBlocks(b1, 2, 3, 2048);
+        Console.WriteLine(blocks.Count);
+        for (int i = 0; i < blocks.Count; i++)
+        {
+            Console.WriteLine(blocks[i].Length);
+        }  */
     }
-    public void main()
+    private void main()
     {
-        // IP Address to listen on. Loopback is the localhost
         IPAddress ipAddr = IPAddress.Loopback;
-
-        // Port to listen on
-        int port = 8082;
-
-        // Create and start a listener for client connection
+        int port = 8081;
         TcpListener listener = new(ipAddr, port);
         listener.Start();
         /*        Dictionary<int, string> resFromCache = cacheServer.FetchFile();
@@ -63,22 +71,50 @@ public partial class FileServer : Form
             }
             else  // command for a image file
             {
-                Console.WriteLine("waiting");
-                /*Cache cacheServer = new();
-                string URL = cacheServer.FetchFile();
+                //Cache cacheServer = new();
+                //string URL = cacheServer.FetchFile();
+                // the four bytes following the command is the number of bytes storing the file name
+                byte[] data = new byte[4];
+                stream.Read(data, 0, 4); // read bytes from the stream into the buffer
+
+                // find out the length of the file name and read the bytes representing the file name
+                int fileNameBytesLength = BitConverter.ToInt32(data, 0);
+                data = new byte[fileNameBytesLength];
+                stream.Read(data, 0, fileNameBytesLength);
+
+                // get the path to the file
+                string fileName = Encoding.UTF8.GetString(data);
+                Console.WriteLine("received filename:" + fileName);
+                string URL = string.Format(".\\asset\\{0}", fileName);
+                Console.WriteLine("url: " + URL);
 
                 // StreamWriter object is used to send data to the client
                 StreamWriter writer = new(stream);
-
                 using (Image image = Image.FromFile(URL))
                 {
                     image.Save(stream_image, image.RawFormat);
-                    // Convert the image to a byte array, then to BASE64 code
-                    string base64 = Convert.ToBase64String(stream_image.ToArray());
+                    byte[] b1 = stream_image.ToArray();
                     try
                     {
-                        // Write the line of text to the network stream
-                        writer.Write(base64);
+                        var blocks = getBlocks(b1, 2, 3, 2048);
+                        int lengthCount = 0;
+                        for(int i = 0; i < blocks.Count; i++)
+                        {
+                            /*string response = Encoding.UTF8.GetString(blocks[i]);*/
+                            string response = Convert.ToBase64String(blocks[i]);
+                            try
+                            {
+                                // Write the line of text to the network stream
+                                writer.Write(response);
+                                writer.Flush();
+                                lengthCount += blocks[i].Length;
+                                Console.WriteLine("sent {0} block(s), total length {1}", i + 1, lengthCount);
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e.Message);
+                            }
+                        }
                     }
                     catch (Exception e)
                     {
@@ -86,10 +122,62 @@ public partial class FileServer : Form
                     }
                 }
                 writer.Flush(); // ask the system send the data now
+                Console.WriteLine("sent all blocks as request");
                 writer.Close();
-                stream.Close();*/
+                stream.Close();
             }
             client.Close();
         }
     }
+    /*
+     * get list of blocks of one file, takes the argument of the base64 code of the image, 
+     * p is the prime chosen
+     * max_size is the maximum size of each block
+     */
+    private double getRabin(byte[] b, int i, int p, int max_size)
+    {
+        // finger print value
+        double res;
+        try
+        {
+            res = (b[i - 2] * Math.Pow(p, 2) + b[i - 1] * p + b[i]) % max_size;
+            return res;
+        }
+        catch(Exception e)
+        {
+            Console.WriteLine(e.Message);
+            return 0;
+        }
+
+    }
+
+    private List<byte[]> getBlocks(byte[] b, int j, int p, int max_size)
+    {
+        List<byte[]> blocks = new();
+        int start = 0; // start point for slicing
+        for (int i = j; i < b.Length; i++)
+        {        
+            if (getRabin(b, i, p, max_size) == 0)
+            {               
+                int length = i - start + 1; // length of block
+                byte[] block = new byte[length];
+                Array.Copy(b, start, block, 0, length);
+                blocks.Add(block);
+                start = i + 1;
+                i += 2;
+            }
+            else if (i==b.Length-1 && getRabin(b, i, p, max_size) != 0)
+            {
+                int length = i - start + 1; // length of block
+                byte[] block = new byte[length];
+                Array.Copy(b, start, block, 0, length);
+                blocks.Add(block);
+            }
+        }
+        return blocks;
+    }
+
 }
+
+
+

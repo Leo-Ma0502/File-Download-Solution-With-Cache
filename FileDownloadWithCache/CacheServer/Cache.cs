@@ -32,8 +32,7 @@ namespace CacheServer
             while(true)
             {
                 Console.WriteLine("Server side cache listening on: {0}:{1} at {2}", ipAddr, portC, DateTime.Now.TimeOfDay);
-                var clientC = listenerC.AcceptTcpClient();
-                Console.WriteLine("client connected with cache server at {0}", DateTime.Now.TimeOfDay);
+                TcpClient clientC = listenerC.AcceptTcpClient();
 
                 // NetworkStream object is used for passing data between client and cache
                 NetworkStream streamC = clientC.GetStream();
@@ -42,31 +41,38 @@ namespace CacheServer
                 byte command = (byte)streamC.ReadByte();
 
                 if (command == 0)
-                {               
+                {
+                    StreamWriter temRes = new(streamC, Encoding.UTF8);
+                    temRes.Write("command {0} received", command);
+                    temRes.Flush();
+
                     // Write a string to the stream
                     /*string greeting = "Hello, client!";
                     writer2C.Write(greeting);*/
 
                     // forward greeting to origin server
                     TcpClient client2O = new(ipAddr.ToString(), portO);
-                    using (NetworkStream stream2O = client2O.GetStream())
-                    {
-                        Console.WriteLine("send greeting at {0}", DateTime.Now.TimeOfDay);
-                        stream2O.WriteByte(command);
-                        stream2O.Flush();
+                    using NetworkStream stream2O = client2O.GetStream();
+                    stream2O.WriteByte(command);
+                    stream2O.Flush();
+                    Console.WriteLine("sent greeting at {0}", DateTime.Now.TimeOfDay);
 
-                        // get greeting message from the server
-                        Console.WriteLine("read response at {0}", DateTime.Now.TimeOfDay);
-                        StreamReader reader4O = new(stream2O, Encoding.UTF8);
-                        Console.WriteLine("got response at {0}", DateTime.Now.TimeOfDay);
-                        string response = reader4O.ReadLine();
-                        Console.WriteLine("Cache received string at {1}: {0}", response, DateTime.Now.TimeOfDay);
+                    // get greeting response from the server
+                    StreamReader reader4O = new(stream2O, Encoding.UTF8);
+                    string response = reader4O.ReadLine();
+                    Console.WriteLine("Cache received response at {1}: {0}", response, DateTime.Now.TimeOfDay);
 
-                        StreamWriter writer2C = new(streamC, Encoding.UTF8);
-                        writer2C.Write(response);
-                        Console.WriteLine("Cache sent to client at {1}: {0}", response, DateTime.Now.TimeOfDay);
-                        writer2C.Flush();
-                    }
+                    /* clientC.Close();
+                     NetworkStream stream2C = new TcpClient(ipAddr.ToString(), 8083).GetStream();
+                     StreamWriter writer2C = new(stream2C, Encoding.UTF8);
+                     writer2C.Write(response);
+                     writer2C.Flush();
+                     Console.WriteLine("Cache sent to client at {1}: {0}", response, DateTime.Now.TimeOfDay);*/
+
+                    StreamWriter writer2C = new(streamC, Encoding.UTF8);
+                    writer2C.Write(response);
+                    writer2C.Flush();
+                    Console.WriteLine("Cache sent to client at {1}: {0}", response, DateTime.Now.TimeOfDay);
 
                 }
                 else

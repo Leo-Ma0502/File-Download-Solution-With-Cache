@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "Client\Client.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileServer", "FileServer\FileServer.csproj", "{C66A91EC-6689-489C-B620-21C10579F97C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CacheServer", "CacheServer\CacheServer.csproj", "{001C9D5C-9B21-4779-A77E-DAC40EAA44FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CacheServer", "CacheServer\CacheServer.csproj", "{001C9D5C-9B21-4779-A77E-DAC40EAA44FE}"
 	ProjectSection(ProjectDependencies) = postProject
 		{C66A91EC-6689-489C-B620-21C10579F97C} = {C66A91EC-6689-489C-B620-21C10579F97C}
 	EndProjectSection

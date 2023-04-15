@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\yehengma\\source\\repos\\Leo-Ma0502\\File-Download-Solution-With-Cache\\FileDownloadWithCache\\FileServer\\FileServer.csproj": {}
+    "C:\\Users\\yehengma\\Source\\Repos\\Leo-Ma0502\\File-Download-Solution-With-Cache\\FileDownloadWithCache\\FileServer\\FileServer.csproj": {}
   },
   "projects": {
-    "C:\\Users\\yehengma\\source\\repos\\Leo-Ma0502\\File-Download-Solution-With-Cache\\FileDownloadWithCache\\FileServer\\FileServer.csproj": {
+    "C:\\Users\\yehengma\\Source\\Repos\\Leo-Ma0502\\File-Download-Solution-With-Cache\\FileDownloadWithCache\\FileServer\\FileServer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\yehengma\\source\\repos\\Leo-Ma0502\\File-Download-Solution-With-Cache\\FileDownloadWithCache\\FileServer\\FileServer.csproj",
+        "projectUniqueName": "C:\\Users\\yehengma\\Source\\Repos\\Leo-Ma0502\\File-Download-Solution-With-Cache\\FileDownloadWithCache\\FileServer\\FileServer.csproj",
         "projectName": "FileServer",
-        "projectPath": "C:\\Users\\yehengma\\source\\repos\\Leo-Ma0502\\File-Download-Solution-With-Cache\\FileDownloadWithCache\\FileServer\\FileServer.csproj",
+        "projectPath": "C:\\Users\\yehengma\\Source\\Repos\\Leo-Ma0502\\File-Download-Solution-With-Cache\\FileDownloadWithCache\\FileServer\\FileServer.csproj",
         "packagesPath": "C:\\Users\\yehengma\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\yehengma\\source\\repos\\Leo-Ma0502\\File-Download-Solution-With-Cache\\FileDownloadWithCache\\FileServer\\obj\\",
+        "outputPath": "C:\\Users\\yehengma\\Source\\Repos\\Leo-Ma0502\\File-Download-Solution-With-Cache\\FileDownloadWithCache\\FileServer\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\yehengma\\AppData\\Roaming\\NuGet\\NuGet.Config",
