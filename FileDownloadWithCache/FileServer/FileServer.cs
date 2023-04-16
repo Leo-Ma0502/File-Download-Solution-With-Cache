@@ -13,34 +13,15 @@ public partial class FileServer : Form
     public FileServer()
     {
         InitializeComponent();
-        main();
-        /*using Image test1 = Image.FromFile(".\\asset\\test1.bmp");
-        MemoryStream ms_1 = new();
-        test1.Save(ms_1, test1.RawFormat);
-        byte[] b1 = ms_1.ToArray();
-
-        var blocks = getBlocks(b1, 2, 3, 2048);
-        Console.WriteLine(blocks.Count);
-        for (int i = 0; i < blocks.Count; i++)
-        {
-            Console.WriteLine(blocks[i].Length);
-        }  */
+        Main();
     }
-    private void main()
+    private void Main()
     {
         IPAddress ipAddr = IPAddress.Loopback;
         int port = 8081;
         TcpListener listener = new(ipAddr, port);
         listener.Start();
-        /*        Dictionary<int, string> resFromCache = cacheServer.FetchFile();
-                foreach (KeyValuePair<int, string> kvp in resFromCache)
-                {
-                    Console.WriteLine("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
-                }
-                Console.WriteLine("Server starting !");*/
-        /*Cache cacheServer = new();
-        cacheServer.HandleRequest();*/
-        // keep running
+
         while (true)
         {
             Console.WriteLine("Server listening on: {0}:{1} at {2}", ipAddr, port, DateTime.Now.TimeOfDay);
@@ -94,36 +75,36 @@ public partial class FileServer : Form
                 {
                     image.Save(stream_image, image.RawFormat);
                     byte[] b1 = stream_image.ToArray();
-                    try
-                    {
-                        var blocks = getBlocks(b1, 2, 3, 2048);
-                        int lengthCount = 0;
-                        for(int i = 0; i < blocks.Count; i++)
+
+                    // TODO send file size first
+                    /*writer.Write("{0}", b1.Length);
+                    writer.Flush();*/
+                   /* Console.WriteLine("Sent total size");
+                    byte followUp = (byte)stream.ReadByte();*/
+                    /*if (followUp == 3)
+                    {*/
+                        try
                         {
-                            /*string response = Encoding.UTF8.GetString(blocks[i]);*/
-                            string response = Convert.ToBase64String(blocks[i]);
-                            try
+                            var blocks = getBlocks(b1, 2, 3, 2048);
+                            int lengthCount = 0;
+                            for (int i = 0; i < blocks.Count; i++)
                             {
-                                // Write the line of text to the network stream
-                                writer.Write(response);
-                                writer.Flush();
+                                stream.Write(blocks[i], 0, blocks[i].Length);
+                                stream.Flush();
                                 lengthCount += blocks[i].Length;
                                 Console.WriteLine("sent {0} block(s), total length {1}", i + 1, lengthCount);
                             }
-                            catch (Exception e)
-                            {
-                                Console.WriteLine(e.Message);
-                            }
                         }
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e.Message);
-                    }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
+
+                    /*}*/
                 }
-                writer.Flush(); // ask the system send the data now
+
                 Console.WriteLine("sent all blocks as request");
-                writer.Close();
+               
                 stream.Close();
             }
             client.Close();
@@ -150,7 +131,6 @@ public partial class FileServer : Form
         }
 
     }
-
     private List<byte[]> getBlocks(byte[] b, int j, int p, int max_size)
     {
         List<byte[]> blocks = new();
