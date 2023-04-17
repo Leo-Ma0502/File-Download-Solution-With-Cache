@@ -1,3 +1,4 @@
+//FileServer.cs
 using System.Net.Sockets;
 using System.Net;
 using System.Text;
@@ -18,7 +19,7 @@ public partial class FileServer : Form
     private void Main()
     {
         IPAddress ipAddr = IPAddress.Loopback;
-        int port = 8081;
+        int port = 8082;
         TcpListener listener = new(ipAddr, port);
         listener.Start();
 
@@ -50,15 +51,10 @@ public partial class FileServer : Form
                 // Flush the StreamWriter to ensure that all data is written to the stream
                 writer.Flush();
             }
-            else  // command for a image file
+            else // command for a image file
             {
-                //Cache cacheServer = new();
-                //string URL = cacheServer.FetchFile();
-                // the four bytes following the command is the number of bytes storing the file name
                 byte[] data = new byte[4];
-                stream.Read(data, 0, 4); // read bytes from the stream into the buffer
-
-                // find out the length of the file name and read the bytes representing the file name
+                stream.Read(data, 0, 4); 
                 int fileNameBytesLength = BitConverter.ToInt32(data, 0);
                 data = new byte[fileNameBytesLength];
                 stream.Read(data, 0, fileNameBytesLength);
@@ -69,44 +65,55 @@ public partial class FileServer : Form
                 string URL = string.Format(".\\asset\\{0}", fileName);
                 Console.WriteLine("url: " + URL);
 
-                // StreamWriter object is used to send data to the client
-                StreamWriter writer = new(stream);
-                using (Image image = Image.FromFile(URL))
-                {
-                    image.Save(stream_image, image.RawFormat);
-                    byte[] b1 = stream_image.ToArray();
+                /*byte[] buffer = new byte[1024];
+                int bytesRead = stream.Read(buffer, 0, buffer.Length);
+                string message = Encoding.ASCII.GetString(buffer, 0, bytesRead);*/
 
-                    // TODO send file size first
-                    /*writer.Write("{0}", b1.Length);
-                    writer.Flush();*/
-                   /* Console.WriteLine("Sent total size");
-                    byte followUp = (byte)stream.ReadByte();*/
-                    /*if (followUp == 3)
+                /*if (message == "ready")
+                {*/
+                    // StreamWriter object is used to send data to the client
+                    StreamWriter writer = new(stream);
+                    using (Image image = Image.FromFile(URL))
+                    {
+                        image.Save(stream_image, image.RawFormat);
+                        byte[] b1 = stream_image.ToArray();
+
+                        // TODO send file size first
+                        writer.Write("{0}\n", b1.Length);
+                        writer.Flush();
+                        Console.WriteLine("Sent total size");
+
+                        /*byte[] readyToReadMsg = Encoding.ASCII.GetBytes("READY_TO_READ");
+                        stream.Write(readyToReadMsg);
+                        stream.Flush();*/
+                    /*byte followUp = (byte)stream.ReadByte();
+                    if (followUp == 3)
                     {*/
-                        try
-                        {
-                            var blocks = getBlocks(b1, 2, 3, 2048);
-                            int lengthCount = 0;
-                            for (int i = 0; i < blocks.Count; i++)
+                    try
                             {
-                                stream.Write(blocks[i], 0, blocks[i].Length);
-                                stream.Flush();
-                                lengthCount += blocks[i].Length;
-                                Console.WriteLine("sent {0} block(s), total length {1}", i + 1, lengthCount);
+                                var blocks = getBlocks(b1, 2, 3, 2048);
+                                int lengthCount = 0;
+                                for (int i = 0; i < blocks.Count; i++)
+                                {
+                                    stream.Write(blocks[i], 0, blocks[i].Length);
+                                    stream.Flush();
+                                    lengthCount += blocks[i].Length;
+                                    Console.WriteLine("sent {0} block(s), total length {1}", i + 1, lengthCount);
+                                }
                             }
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine(e.Message);
-                        }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e.Message);
+                            }
 
-                    /*}*/
+                        /*}*/
+                    }
+                    Console.WriteLine("sent all blocks as request");
+                    stream.Close();
+
                 }
-
-                Console.WriteLine("sent all blocks as request");
-               
-                stream.Close();
-            }
+              
+           /* }*/
             client.Close();
         }
     }
@@ -140,11 +147,14 @@ public partial class FileServer : Form
             if (getRabin(b, i, p, max_size) == 0)
             {               
                 int length = i - start + 1; // length of block
+                // TODO control the size of each block
+  
                 byte[] block = new byte[length];
                 Array.Copy(b, start, block, 0, length);
                 blocks.Add(block);
                 start = i + 1;
                 i += 2;
+               
             }
             else if (i==b.Length-1 && getRabin(b, i, p, max_size) != 0)
             {

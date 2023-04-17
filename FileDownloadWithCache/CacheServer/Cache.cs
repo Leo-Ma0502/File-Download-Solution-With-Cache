@@ -8,6 +8,8 @@ using System.Reflection;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CacheServer
 {
@@ -40,44 +42,90 @@ namespace CacheServer
                 // read the first byte that represents the command of the client
                 byte command = (byte)streamC.ReadByte();
 
-                if (command == 0)
+                if (command == 0) // forward greeting 
                 {
                     StreamWriter temRes = new(streamC, Encoding.UTF8);
-                    temRes.Write("command {0} received", command);
+                    temRes.Write("command {0} received\n", command);
                     temRes.Flush();
-
-                    // Write a string to the stream
-                    /*string greeting = "Hello, client!";
-                    writer2C.Write(greeting);*/
 
                     // forward greeting to origin server
                     TcpClient client2O = new(ipAddr.ToString(), portO);
                     using NetworkStream stream2O = client2O.GetStream();
                     stream2O.WriteByte(command);
                     stream2O.Flush();
-                    Console.WriteLine("sent greeting at {0}", DateTime.Now.TimeOfDay);
+                    Console.WriteLine("Cache sent greeting at {0}", DateTime.Now.TimeOfDay);
 
                     // get greeting response from the server
                     StreamReader reader4O = new(stream2O, Encoding.UTF8);
                     string response = reader4O.ReadLine();
                     Console.WriteLine("Cache received response at {1}: {0}", response, DateTime.Now.TimeOfDay);
 
-                    /* clientC.Close();
-                     NetworkStream stream2C = new TcpClient(ipAddr.ToString(), 8083).GetStream();
-                     StreamWriter writer2C = new(stream2C, Encoding.UTF8);
-                     writer2C.Write(response);
-                     writer2C.Flush();
-                     Console.WriteLine("Cache sent to client at {1}: {0}", response, DateTime.Now.TimeOfDay);*/
-
-                    StreamWriter writer2C = new(streamC, Encoding.UTF8);
-                    writer2C.Write(response);
-                    writer2C.Flush();
+                    // forward server's message to client
+                    temRes.Write("{0}\n", response);
+                    temRes.Flush();
                     Console.WriteLine("Cache sent to client at {1}: {0}", response, DateTime.Now.TimeOfDay);
 
                 }
-                else
+                else // forward download request
                 {
-                    Console.WriteLine("waiting...");
+                    StreamWriter temRes = new(streamC);
+                    temRes.Write("command {0} received\n", command);
+                    temRes.Flush();
+
+                    // receive file name
+                    byte[] data = new byte[4];
+                    streamC.Read(data, 0, 4);
+                    int fileNameBytesLength = BitConverter.ToInt32(data, 0);
+                    data = new byte[fileNameBytesLength];
+                    streamC.Read(data, 0, fileNameBytesLength);
+
+                    // get the path to the file
+                    string fileName = Encoding.UTF8.GetString(data);
+                    Console.WriteLine("received filename:" + fileName);
+                    string URL = string.Format(".\\asset\\{0}", fileName);
+                    Console.WriteLine("url: " + URL);
+
+                    // forward request to origin server
+                    TcpClient client2O = new(ipAddr.ToString(), portO);
+                    using NetworkStream stream2O = client2O.GetStream();
+                    byte[] fileNameBytes = Encoding.UTF8.GetBytes(fileName);
+                    byte[] fileNameLengthBytes = BitConverter.GetBytes(fileNameBytes.Length);
+                    byte[] req = new byte[5 + fileNameBytes.Length];
+                    req[0] = command;
+                    Array.Copy(fileNameLengthBytes, 0, req, 1, fileNameLengthBytes.Length);
+                    Array.Copy(fileNameBytes, 0, req, 5, fileNameBytes.Length);
+                    stream2O.Write(req, 0, req.Length);
+                    stream2O.Flush();
+                    Console.WriteLine("Cache sent request to origin server at {0}", DateTime.Now.TimeOfDay);
+
+                    // get response from the server and forward file size
+                    StreamReader reader4O = new(stream2O, Encoding.UTF8);
+                    string totalLength = reader4O.ReadLine();                 
+                    Console.WriteLine("Cache received total length at {1}: {0}", totalLength, DateTime.Now.TimeOfDay);
+                    temRes.Write("{0}\n", totalLength);
+                    temRes.Flush();
+
+                    // receiving blocks and forwarding to client
+                    ulong totalSize = ulong.Parse(totalLength);
+                    Console.WriteLine("Total size: {0}", totalSize);
+                    byte[] imageByte = new byte[totalSize];
+                    ulong remainingSize = totalSize;
+                    int offset = 0;                                  
+                    while (remainingSize != 0 && stream2O != null)
+                    {
+                        int readSize = stream2O.Read(imageByte, offset, (int)remainingSize);
+                        var block = new ArraySegment<byte>(imageByte, offset, readSize).ToArray();
+                        streamC.Write(block, 0, block.Length);
+                        streamC.Flush();
+                        Console.WriteLine("Sent total size");
+                        remainingSize -= (ulong)readSize;
+                        offset += readSize;
+                    }
+                    reader4O.Close();
+                    stream2O.Close();
+                    streamC.Close();
+                    client2O.Close();
+
                 }
             }
         }
