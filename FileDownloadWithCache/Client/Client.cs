@@ -1,15 +1,7 @@
 //client.cs
-using System.Net.Sockets;
 using System.Net;
+using System.Net.Sockets;
 using System.Text;
-using System.Drawing;
-using System.Windows.Forms.Design;
-using System.IO;
-using System.Buffers.Text;
-using System.CodeDom.Compiler;
-using System.Linq.Expressions;
-using System.Collections;
-using System.Diagnostics.Eventing.Reader;
 
 namespace Client
 {
@@ -82,7 +74,7 @@ namespace Client
 
             StreamWriter proceed = new(stream);
             int count = 0;
-            while (remainingSize != 0 && stream != null)
+            while (remainingSize > 0 && stream != null)
             {
                 Console.WriteLine("=====================");
                 proceed.Write("OK\n");
@@ -159,7 +151,17 @@ namespace Client
                 Request(ipAddr, port, "test1.bmp");
             }
             catch (Exception err) { Console.WriteLine(err.Message); }
+        }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            IPAddress ipAddr = IPAddress.Loopback;
+            int port = 8081;
+            try
+            {
+                Request(ipAddr, port, "test2.bmp");
+            }
+            catch (Exception err) { Console.WriteLine(err.Message); }
         }
     }
 }

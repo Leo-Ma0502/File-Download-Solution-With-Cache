@@ -1,11 +1,7 @@
 //FileServer.cs
-using System.Net.Sockets;
 using System.Net;
+using System.Net.Sockets;
 using System.Text;
-using System.Collections.Generic;
-using System.IO;
-using System.Diagnostics;
-using System.Buffers.Text;
 
 namespace FileServer;
 
@@ -72,13 +68,13 @@ public partial class FileServer : Form
                     image.Save(stream_image, image.RawFormat);
                     byte[] b1 = stream_image.ToArray();
 
-                    // TODO send file size first
+                    // send file size first
                     writer.Write("{0}\n", b1.Length);
                     writer.Flush();
                     Console.WriteLine("Sent total size");
                     try
                     {
-                        var blocks = getBlocks(b1, 2, 3, 2048);
+                        var blocks = GetBlocks(b1, 5, 7, 2048);
                         int lengthCount = 0;
                         StreamReader reader4C = new(stream, Encoding.UTF8);
                         for (int i = 0; i < blocks.Count; i++)
@@ -91,20 +87,15 @@ public partial class FileServer : Form
                                 writer.Write("{0}", temp);
                                 writer.Write("\r\n");
                                 writer.Flush();
-                                stream.Write(blocks[i], 0, blocks[i].Length);
-                                stream.Flush();
-                                lengthCount += blocks[i].Length;
-                                Console.WriteLine("sent {0} block(s), total length {1}", i + 1, lengthCount);
+                                proceed = reader4C.ReadLine();
+                                if (proceed == "OK")
+                                {
+                                    stream.Write(blocks[i], 0, blocks[i].Length);
+                                    stream.Flush();
+                                    lengthCount += blocks[i].Length;
+                                    Console.WriteLine("sent {0} block(s), total length {1}", i + 1, lengthCount);
+                                }
                             }
-                            /*string temp = blocks[i].Length.ToString();*/
-                            /* var temp = blocks[i].Length;
-                             writer.Write("{0}", temp);
-                             writer.Write("\r\n");
-                             writer.Flush();
-                             stream.Write(blocks[i], 0, blocks[i].Length);
-                             stream.Flush();
-                             lengthCount += blocks[i].Length;
-                             Console.WriteLine("sent {0} block(s), total length {1}", i + 1, lengthCount);*/
                         }
                     }
                     catch (Exception e)
@@ -115,56 +106,56 @@ public partial class FileServer : Form
                 Console.WriteLine("sent all blocks as request");
                 stream.Close();
             }
-
             client.Close();
         }
     }
     /*
-     * get list of blocks of one file, takes the argument of the base64 code of the image, 
+     * get list of blocks of one file,
      * p is the prime chosen
-     * max_size is the maximum size of each block
+     * M is used to do mod computation
      */
-    private double getRabin(byte[] b, int i, int p, int max_size)
+    private static double GetRabin(byte[] b, int p, int M)
     {
         // finger print value
-        double res;
+        double res = 0;
         try
         {
-            res = (b[i - 2] * Math.Pow(p, 2) + b[i - 1] * p + b[i]) % max_size;
-            return res;
+            for (int i = 0; i < b.Length; i++)
+            {
+                res += (b[i] * Math.Pow(p, b.Length - i - 1));
+            }
         }
         catch (Exception e)
         {
             Console.WriteLine(e.Message);
-            return 0;
         }
-
+        return res % M;
     }
-    private List<byte[]> getBlocks(byte[] b, int j, int p, int max_size)
+    /*
+     * get blocks,
+     * takes argument of image byte array
+    */
+    private static List<byte[]> GetBlocks(byte[] b, int window_length, int p, int M)
     {
+        /*int size_control = 2048;
+        int margin = 100;*/
         List<byte[]> blocks = new();
         int start = 0; // start point for slicing
-        for (int i = j; i < b.Length; i++)
+        for (int i = 0; i < b.Length - window_length; i++)
         {
-            int length = i - start + 1; // length of block
-            double fingerPrint = getRabin(b, i, p, max_size);
-            if (fingerPrint == 0 && length < max_size)
+            byte[] temp = new byte[window_length];
+            Array.Copy(b, i, temp, 0, window_length);
+            int length = i - start + window_length + 1; // length of potential block
+            double fingerPrint = GetRabin(temp, p, M);
+            if (fingerPrint == 0)
             {
                 byte[] block = new byte[length];
                 Array.Copy(b, start, block, 0, length);
                 blocks.Add(block);
-                start = i + 1;
-                i += 2;
+                start = i + window_length + 1;
+                i = start - 1;
             }
-            else if (length == max_size)
-            {
-                byte[] block = new byte[length];
-                Array.Copy(b, start, block, 0, length);
-                blocks.Add(block);
-                start = i + 1;
-                i += 2;
-            }
-            else if (i == b.Length - 1)
+            else if (i == b.Length - window_length - 1)
             {
                 byte[] block = new byte[length];
                 Array.Copy(b, start, block, 0, length);

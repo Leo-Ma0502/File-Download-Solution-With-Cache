@@ -1,10 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\FileDownloadWithCache",
-    "\\FileDownloadWithCache\\Client",
-    "\\FileDownloadWithCache\\FileServer"
+    "\\FileDownloadWithCache"
   ],
-  "SelectedNode": "\\FileDownloadWithCache\\Client\\Client.cs",
+  "SelectedNode": "\\FileDownloadWithCache\\FileDownloadWithCache.sln",
   "PreviewInSolutionExplorer": false
 }

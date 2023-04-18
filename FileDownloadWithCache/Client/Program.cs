@@ -1,11 +1,3 @@
-using System.Drawing;
-using System.IO;
-using System.Net.Sockets;
-using System.Net;
-using System.Text;
-using System.Windows.Forms;
-using FileServer;
-
 namespace Client
 {
     internal static class Program
