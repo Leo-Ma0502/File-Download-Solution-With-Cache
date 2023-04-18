@@ -1,10 +1,3 @@
-using System;
-using System.Net.Sockets;
-using System.Net;
-using System.Text;
-using System.Collections;
-using System.Diagnostics;
-
 namespace FileServer
 {
     internal static class Program
