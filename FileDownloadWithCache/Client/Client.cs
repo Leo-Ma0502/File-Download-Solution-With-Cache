@@ -98,18 +98,13 @@ namespace Client
                     proceed.Write("OK\n");
                     proceed.Flush();
                     // get index of block
-                    /* string index_length = reader.ReadLine();
-                     byte[] index = new byte[int.Parse(index_length)];
-                     int temp = stream.Read(index, 0, int.Parse(index_length));*/
                     string hash_string = reader.ReadLine();
                     byte[] index = Convert.FromBase64String(hash_string);
                     // get block from local cache
                     var block = cache[index];
-                    Array.Copy(block, imageByte, 0);
+                    Array.Copy(block, 0, imageByte, offset, block.Length);
                     remainingSize -= (ulong)block.Length;
                     offset += block.Length;
-                    /*proceed.Write("OK\n");
-                    proceed.Flush();*/
                 }
                 else if (cached == "new")
                 {
@@ -117,10 +112,6 @@ namespace Client
                     proceed.Write("OK\n");
                     proceed.Flush();
                     // get hash value
-                    /* string hash_length = reader.ReadLine();
-                     Console.WriteLine("got length of hash: {0}", hash_length);
-                     byte[] hash = new byte[int.Parse(hash_length)];
-                     int hash_temp = stream.Read(hash, 0, int.Parse(hash_length));*/
                     string hash_string = reader.ReadLine();
                     byte[] hash = Convert.FromBase64String(hash_string);
                     Console.WriteLine("received hash");
@@ -135,9 +126,6 @@ namespace Client
                     remainingSize -= (ulong)readSize;
                     offset += readSize;
                     Console.WriteLine("Ready for next run");
-                    /*proceed.Write("OK\n");
-                    proceed.Flush();
-                    Console.WriteLine("sent proceed request");*/
                 }
                 Console.WriteLine("retrieved {0} blocks", count + 1);
                 count++;

@@ -119,8 +119,8 @@ namespace CacheServer
 
                     StreamReader reader4C = new(streamC, Encoding.UTF8);
                     StreamWriter proceed2O = new(stream2O);
-                    int count = 0; // test
-                    while (remainingSize != 0 && stream2O != null && count < 300)
+                    int count = 0; 
+                    while (remainingSize != 0 && stream2O != null)
                     {
                         Console.WriteLine("=====================");
                         string proceed = reader4C.ReadLine();
@@ -152,14 +152,17 @@ namespace CacheServer
                                 temRes.Write("{0}\n", cached);
                                 temRes.Flush();
                                 Console.WriteLine("told client it is {0}", cached);
-                                temRes.Write("{0}\n", Convert.ToBase64String(hashValue));
-                                temRes.Flush();
-                                streamC.Write(hashValue, 0, hashValue.Length);
-                                streamC.Flush();
-                                remainingSize -= (ulong)readSize;
-                                offset += readSize;
-                                remainingSize -= (ulong)length_block;
-                                offset += length_block;
+                                proceed = reader4C.ReadLine();
+                                if (proceed == "OK")
+                                {
+                                    temRes.Write("{0}\n", Convert.ToBase64String(hashValue));
+                                    temRes.Flush();
+                                    Console.WriteLine("told client it is {0}", cached);
+/*                                    remainingSize -= (ulong)readSize;*/
+                                    offset += readSize;
+                                    remainingSize -= (ulong)length_block;
+                                    offset += length_block;
+                                }
                             }
                             else // save fingerprint and send fingerprint of block
                             {
@@ -174,8 +177,6 @@ namespace CacheServer
                                     temRes.Write("{0}\n", Convert.ToBase64String(hashValue));
                                     temRes.Flush();
                                     Console.WriteLine("sent hash value to client");
-                                    /*                                    streamC.Write(hashValue, 0, hashValue.Length);
-                                                                        streamC.Flush();*/
                                     proceed = reader4C.ReadLine();
                                     if (proceed == "OK")
                                     {
@@ -186,92 +187,18 @@ namespace CacheServer
                                         streamC.Write(block, 0, block.Length);
                                         streamC.Flush();
                                         Console.WriteLine("forwarded block[{0}]", count);
-                                        remainingSize -= (ulong)readSize;
+                                        /*remainingSize -= (ulong)readSize;*/
                                         offset += readSize;
                                         remainingSize -= (ulong)length_block;
                                         offset += length_block;
                                     }
                                 }
-                                /* temRes.Write("{0}\n", Convert.ToBase64String(hashValue));
-                                 temRes.Flush();*/
-                                /*streamC.Write(hashValue, 0, hashValue.Length);
-                                streamC.Flush();
-                                // add hash to cache
-                                cache.Add(hashValue);
-                                Console.WriteLine("cached a block");
-                                // send block
-                                streamC.Write(block, 0, block.Length);
-                                streamC.Flush();
-                                Console.WriteLine("sent a block");
-                                remainingSize -= (ulong)readSize;
-                                offset += readSize;
-                                remainingSize -= (ulong)length_block;
-                                offset += length_block;*/
                             }
                             Console.WriteLine("forwarded {0} blocks", count + 1);
                             count++;
                             Console.WriteLine("=====================");
 
                         }
-                        /*StreamWriter proceed2O = new(stream2O);
-                        proceed2O.Write("OK\n");
-                        proceed2O.Flush();
-                        Console.WriteLine("forwarded proceed request");
-                        string length_string = "";                     
-                        length_string = reader4O.ReadLine();
-                        Console.WriteLine("Current read: {0}",length_string);
-                        int length_block = Convert.ToInt32(length_string);
-                        Console.WriteLine("Current block length: {0}", length_block);
-                        byte[] block = new byte[length_block];
-                        int temp = stream2O.Read(block, 0, length_block);
-                        int readSize = temp;
-
-                        // compute hash value of the block 
-                        using SHA256 sha256 = SHA256.Create();
-                        byte[] hashValue = sha256.ComputeHash(block);
-                       
-                        // check if the block is cached
-                        if (cache.Contains(hashValue)) // send fingerprint of the block
-                        {
-                            // tell client the block is already cached
-                            string cached = "cached";
-                            temRes.Write("{0}\n", cached);
-                            temRes.Flush();
-                            Console.WriteLine("told client it is {0}", cached);
-                            temRes.Write("{0}\n", Convert.ToBase64String(hashValue));
-                            temRes.Flush();
-                            streamC.Write(hashValue, 0, hashValue.Length);
-                            streamC.Flush();
-                            remainingSize -= (ulong)readSize;
-                            offset += readSize;
-                            remainingSize -= (ulong)length_block;
-                            offset += length_block;
-                        }
-                        else // save fingerprint and send fingerprint of block
-                        {
-                            // tell client the block is new
-                            string cached = "new";
-                            temRes.Write("{0}\n", cached);
-                            temRes.Flush();
-                            Console.WriteLine("told client it is {0}", cached);
-                            temRes.Write("{0}\n", Convert.ToBase64String(hashValue));
-                            temRes.Flush();
-                            streamC.Write(hashValue, 0, hashValue.Length);
-                            streamC.Flush();
-                            // add hash to cache
-                            cache.Add(hashValue);
-                            Console.WriteLine("cached a block");
-                            // send block
-                            streamC.Write(block, 0, block.Length);
-                            streamC.Flush();
-                            Console.WriteLine("sent a block");
-                            remainingSize -= (ulong)readSize;
-                            offset += readSize;
-                            remainingSize -= (ulong)length_block;
-                            offset += length_block;                                                     
-                        }
-                        count++;
-                        Console.WriteLine("=====================");*/
                     }
                     reader4O.Close();
                     stream2O.Close();
