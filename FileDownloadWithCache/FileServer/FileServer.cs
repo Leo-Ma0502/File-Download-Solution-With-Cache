@@ -147,24 +147,24 @@ public partial class FileServer : Form
         for (int i = j; i < b.Length; i++)
         {
             int length = i - start + 1; // length of block
-            if (getRabin(b, i, p, max_size) == 0)
+            double fingerPrint = getRabin(b, i, p, max_size);
+            if (fingerPrint == 0 && length < max_size)
             {
-                // TODO control the size of each block
-                if (length < max_size+10)
-                {
-                    byte[] block = new byte[length];
-                    Array.Copy(b, start, block, 0, length);
-                    blocks.Add(block);
-                    start = i + 1;
-                    i += 2;
-                }
-                /*byte[] block = new byte[length];
+                byte[] block = new byte[length];
                 Array.Copy(b, start, block, 0, length);
                 blocks.Add(block);
                 start = i + 1;
-                i += 2;*/
+                i += 2;
             }
-            else if (i == b.Length - 1 && getRabin(b, i, p, max_size) != 0)
+            else if (length == max_size)
+            {
+                byte[] block = new byte[length];
+                Array.Copy(b, start, block, 0, length);
+                blocks.Add(block);
+                start = i + 1;
+                i += 2;
+            }
+            else if (i == b.Length - 1)
             {
                 byte[] block = new byte[length];
                 Array.Copy(b, start, block, 0, length);
