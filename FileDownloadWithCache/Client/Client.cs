@@ -7,6 +7,9 @@ using System.Windows.Forms.Design;
 using System.IO;
 using System.Buffers.Text;
 using System.CodeDom.Compiler;
+using System.Linq.Expressions;
+using System.Collections;
+using System.Diagnostics.Eventing.Reader;
 
 namespace Client
 {
@@ -18,6 +21,7 @@ namespace Client
             /*progressBar1.Visible = false;*/
         }
         TcpClient client;
+        Dictionary<byte[], byte[]> cache = new Dictionary<byte[], byte[]>();
         // greeting
         private void Greeting(IPAddress ipAddr, int port)
         {
@@ -75,11 +79,68 @@ namespace Client
             byte[] imageByte = new byte[totalSize];
             ulong remainingSize = totalSize;
             int offset = 0;
+
+            StreamWriter proceed = new(stream);
+            int count = 0;
             while (remainingSize != 0 && stream != null)
             {
-                int readSize = stream.Read(imageByte, offset, (int)remainingSize);
-                remainingSize -= (ulong)readSize;             
-                offset += readSize;
+                Console.WriteLine("=====================");
+                proceed.Write("OK\n");
+                proceed.Flush();
+                Console.WriteLine("sent proceed request");
+
+                // be informed whether block cached or not
+                string cached = reader.ReadLine();
+                Console.WriteLine("Received cached: {0}", cached);
+                if (cached == "cached")
+                {
+                    Console.WriteLine("This block is cached");
+                    proceed.Write("OK\n");
+                    proceed.Flush();
+                    // get index of block
+                    /* string index_length = reader.ReadLine();
+                     byte[] index = new byte[int.Parse(index_length)];
+                     int temp = stream.Read(index, 0, int.Parse(index_length));*/
+                    string hash_string = reader.ReadLine();
+                    byte[] index = Convert.FromBase64String(hash_string);
+                    // get block from local cache
+                    var block = cache[index];
+                    Array.Copy(block, imageByte, 0);
+                    remainingSize -= (ulong)block.Length;
+                    offset += block.Length;
+                    /*proceed.Write("OK\n");
+                    proceed.Flush();*/
+                }
+                else if (cached == "new")
+                {
+                    Console.WriteLine("This block is new");
+                    proceed.Write("OK\n");
+                    proceed.Flush();
+                    // get hash value
+                    /* string hash_length = reader.ReadLine();
+                     Console.WriteLine("got length of hash: {0}", hash_length);
+                     byte[] hash = new byte[int.Parse(hash_length)];
+                     int hash_temp = stream.Read(hash, 0, int.Parse(hash_length));*/
+                    string hash_string = reader.ReadLine();
+                    byte[] hash = Convert.FromBase64String(hash_string);
+                    Console.WriteLine("received hash");
+                    // get block
+                    proceed.Write("OK\n");
+                    proceed.Flush();
+                    int readSize = stream.Read(imageByte, offset, (int)remainingSize);
+                    Console.WriteLine("received block");
+                    var block_new = new ArraySegment<byte>(imageByte, offset, readSize).ToArray();
+                    cache.Add(hash, block_new);
+                    Console.WriteLine("added new block to cache");
+                    remainingSize -= (ulong)readSize;
+                    offset += readSize;
+                    Console.WriteLine("Ready for next run");
+                    /*proceed.Write("OK\n");
+                    proceed.Flush();
+                    Console.WriteLine("sent proceed request");*/
+                }
+                Console.WriteLine("retrieved {0} blocks", count + 1);
+                count++;
             }
             MemoryStream ms = new(imageByte, 0, imageByte.Length);
             image = Image.FromStream(ms);
