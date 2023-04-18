@@ -34,9 +34,9 @@ partial class FileServer
         // 
         AutoScaleDimensions = new SizeF(13F, 32F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(800, 450);
+        ClientSize = new Size(1648, 1056);
         Name = "FileServer";
-        Text = "Form1";
+        Text = "File Server";
         ResumeLayout(false);
     }
 

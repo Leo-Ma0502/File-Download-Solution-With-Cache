@@ -10,7 +10,6 @@ namespace Client
         public Client()
         {
             InitializeComponent();
-            /*progressBar1.Visible = false;*/
         }
         TcpClient client;
         Dictionary<string, byte[]> cache = new();
@@ -152,7 +151,6 @@ namespace Client
             }
             catch (Exception err) { Console.WriteLine(err.Message); }
         }
-
         private void button3_Click(object sender, EventArgs e)
         {
             IPAddress ipAddr = IPAddress.Loopback;

@@ -10,9 +10,8 @@ public partial class FileServer : Form
     public FileServer()
     {
         InitializeComponent();
-        Main();
     }
-    private void Main()
+    public static void StartServing()
     {
         IPAddress ipAddr = IPAddress.Loopback;
         int port = 8082;
@@ -164,7 +163,7 @@ public partial class FileServer : Form
         }
         return blocks;
     }
-
+   
 }
 
 
