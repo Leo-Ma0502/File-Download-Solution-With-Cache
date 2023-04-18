@@ -1,0 +1,15 @@
+C:\Users\yehengma\Source\Repos\Leo-Ma0502\File-Download-Solution-With-Cache\FileDownloadWithCache\test1\bin\Debug\net7.0\test1.exe
+C:\Users\yehengma\Source\Repos\Leo-Ma0502\File-Download-Solution-With-Cache\FileDownloadWithCache\test1\bin\Debug\net7.0\test1.deps.json
+C:\Users\yehengma\Source\Repos\Leo-Ma0502\File-Download-Solution-With-Cache\FileDownloadWithCache\test1\bin\Debug\net7.0\test1.runtimeconfig.json
+C:\Users\yehengma\Source\Repos\Leo-Ma0502\File-Download-Solution-With-Cache\FileDownloadWithCache\test1\bin\Debug\net7.0\test1.dll
+C:\Users\yehengma\Source\Repos\Leo-Ma0502\File-Download-Solution-With-Cache\FileDownloadWithCache\test1\bin\Debug\net7.0\test1.pdb
+C:\Users\yehengma\Source\Repos\Leo-Ma0502\File-Download-Solution-With-Cache\FileDownloadWithCache\test1\obj\Debug\net7.0\test1.csproj.AssemblyReference.cache
+C:\Users\yehengma\Source\Repos\Leo-Ma0502\File-Download-Solution-With-Cache\FileDownloadWithCache\test1\obj\Debug\net7.0\test1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\yehengma\Source\Repos\Leo-Ma0502\File-Download-Solution-With-Cache\FileDownloadWithCache\test1\obj\Debug\net7.0\test1.AssemblyInfoInputs.cache
+C:\Users\yehengma\Source\Repos\Leo-Ma0502\File-Download-Solution-With-Cache\FileDownloadWithCache\test1\obj\Debug\net7.0\test1.AssemblyInfo.cs
+C:\Users\yehengma\Source\Repos\Leo-Ma0502\File-Download-Solution-With-Cache\FileDownloadWithCache\test1\obj\Debug\net7.0\test1.csproj.CoreCompileInputs.cache
+C:\Users\yehengma\Source\Repos\Leo-Ma0502\File-Download-Solution-With-Cache\FileDownloadWithCache\test1\obj\Debug\net7.0\test1.dll
+C:\Users\yehengma\Source\Repos\Leo-Ma0502\File-Download-Solution-With-Cache\FileDownloadWithCache\test1\obj\Debug\net7.0\refint\test1.dll
+C:\Users\yehengma\Source\Repos\Leo-Ma0502\File-Download-Solution-With-Cache\FileDownloadWithCache\test1\obj\Debug\net7.0\test1.pdb
+C:\Users\yehengma\Source\Repos\Leo-Ma0502\File-Download-Solution-With-Cache\FileDownloadWithCache\test1\obj\Debug\net7.0\test1.genruntimeconfig.cache
+C:\Users\yehengma\Source\Repos\Leo-Ma0502\File-Download-Solution-With-Cache\FileDownloadWithCache\test1\obj\Debug\net7.0\ref\test1.dll

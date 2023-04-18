@@ -13,7 +13,7 @@ namespace Client
             /*progressBar1.Visible = false;*/
         }
         TcpClient client;
-        Dictionary<byte[], byte[]> cache = new Dictionary<byte[], byte[]>();
+        Dictionary<string, byte[]> cache = new();
         // greeting
         private void Greeting(IPAddress ipAddr, int port)
         {
@@ -93,7 +93,7 @@ namespace Client
                     string hash_string = reader.ReadLine();
                     byte[] index = Convert.FromBase64String(hash_string);
                     // get block from local cache
-                    var block = cache[index];
+                    var block = cache[Convert.ToBase64String(index)];
                     Array.Copy(block, 0, imageByte, offset, block.Length);
                     remainingSize -= (ulong)block.Length;
                     offset += block.Length;
@@ -113,7 +113,7 @@ namespace Client
                     int readSize = stream.Read(imageByte, offset, (int)remainingSize);
                     Console.WriteLine("received block");
                     var block_new = new ArraySegment<byte>(imageByte, offset, readSize).ToArray();
-                    cache.Add(hash, block_new);
+                    cache.Add(Convert.ToBase64String(hash), block_new);
                     Console.WriteLine("added new block to cache");
                     remainingSize -= (ulong)readSize;
                     offset += readSize;

@@ -153,7 +153,7 @@ namespace CacheServer
                                 {
                                     temRes.Write("{0}\n", Convert.ToBase64String(hashValue));
                                     temRes.Flush();
-                                    Console.WriteLine("told client it is {0}", cached);
+                                    Console.WriteLine("sent hash value to client");
                                     offset += readSize;
                                     remainingSize -= (ulong)length_block;
                                     offset += length_block;
@@ -194,7 +194,7 @@ namespace CacheServer
                             Console.WriteLine("=====================");
                         }
                     }
-                    Console.WriteLine(".......... Constructed from cache: {0} ...........", (ulong)fromCache / totalSize);
+                    Console.WriteLine(".......... Constructed from cache: {0} % ...........", (double)fromCache/(double)totalSize*100);
                     reader4O.Close();
                     stream2O.Close();
                     streamC.Close();
