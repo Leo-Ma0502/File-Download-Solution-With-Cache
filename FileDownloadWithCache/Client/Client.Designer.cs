@@ -28,24 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
             button2 = new Button();
             button3 = new Button();
+            listView1 = new ListView();
+            button1 = new Button();
             SuspendLayout();
-            // 
-            // button1
-            // 
-            button1.Location = new Point(12, 23);
-            button1.Name = "button1";
-            button1.Size = new Size(150, 46);
-            button1.TabIndex = 0;
-            button1.Text = "Connect";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
             // 
             // button2
             // 
-            button2.Location = new Point(12, 101);
+            button2.Location = new Point(12, 99);
             button2.Name = "button2";
             button2.Size = new Size(150, 46);
             button2.TabIndex = 1;
@@ -63,23 +54,42 @@
             button3.UseVisualStyleBackColor = true;
             button3.Click += button3_Click;
             // 
+            // listView1
+            // 
+            listView1.Location = new Point(239, 23);
+            listView1.Name = "listView1";
+            listView1.Size = new Size(1432, 1232);
+            listView1.TabIndex = 3;
+            listView1.UseCompatibleStateImageBehavior = false;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(12, 23);
+            button1.Name = "button1";
+            button1.Size = new Size(150, 46);
+            button1.TabIndex = 4;
+            button1.Text = "button1";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // Client
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1739, 954);
+            ClientSize = new Size(1801, 1300);
+            Controls.Add(button1);
+            Controls.Add(listView1);
             Controls.Add(button3);
             Controls.Add(button2);
-            Controls.Add(button1);
             Name = "Client";
             Text = "Client";
             ResumeLayout(false);
         }
 
         #endregion
-
-        private Button button1;
         private Button button2;
         private Button button3;
+        private ListView listView1;
+        private Button button1;
     }
 }

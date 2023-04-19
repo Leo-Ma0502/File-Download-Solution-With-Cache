@@ -66,7 +66,7 @@ namespace Cache
                     Console.WriteLine("Cache sent to client at {1}: {0}", response, DateTime.Now.TimeOfDay);
 
                 }
-                else // forward download request
+                else if (command == 1) // forward download request
                 {
                     StreamWriter temRes = new(streamC);
                     temRes.Write("command {0} received\n", command);
@@ -204,6 +204,52 @@ namespace Cache
                     streamC.Close();
                     client2O.Close();
 
+                }
+                else if (command == 3) // forward request for file names
+                {
+                    StreamWriter temRes = new(streamC, Encoding.UTF8);
+                    StreamReader reader4C = new(streamC, Encoding.UTF8);
+                    temRes.Write("command {0} received\n", command);
+                    temRes.Flush();
+
+                    // forward request to origin server
+                    TcpClient client2O = new(ipAddr.ToString(), portO);
+                    using NetworkStream stream2O = client2O.GetStream();
+                    StreamWriter proceed2O = new(stream2O);
+                    stream2O.WriteByte(command);
+                    stream2O.Flush();
+                    Console.WriteLine("Cache forwarded at {0}", DateTime.Now.TimeOfDay);
+
+                    StreamReader reader4O = new(stream2O, Encoding.UTF8);
+                    int length_list = int.Parse(reader4O.ReadLine());
+                    proceed2O.Write("OK\n");
+                    proceed2O.Flush();
+
+                    temRes.Write("{0}\n", length_list);
+                    temRes.Flush();
+
+                    for (int i = 0; i < length_list; i++)
+                    {
+                        string temp = reader4O.ReadLine();
+                        string proceed = reader4C.ReadLine();
+                        if (proceed == "OK")
+                        {
+                            temRes.Write(temp);
+                            temRes.Flush();
+                            proceed2O.Write("OK\n");
+                            proceed2O.Flush();
+                        }                     
+                    }
+
+                    
+
+
+
+
+                    // forward server's message to client
+                    /*temRes.Write("{0}\n", response);
+                    temRes.Flush();
+                    Console.WriteLine("Cache sent to client at {1}: {0}", response, DateTime.Now.TimeOfDay);*/
                 }
             }
         }

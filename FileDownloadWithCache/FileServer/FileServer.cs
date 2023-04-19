@@ -46,7 +46,7 @@ public partial class FileServer : Form
                 // Flush the StreamWriter to ensure that all data is written to the stream
                 writer.Flush();
             }
-            else // command for a image file
+            else if (command == 1) // command for a image file
             {
                 byte[] data = new byte[4];
                 stream.Read(data, 0, 4);
@@ -104,6 +104,25 @@ public partial class FileServer : Form
                 }
                 Console.WriteLine("sent all blocks as request");
                 stream.Close();
+            }
+            else if (command == 3)
+            {
+                StreamWriter writer = new(stream, Encoding.UTF8);
+                string[] fileList = GetFiles();
+                writer.Write("{0}\n", fileList.Length);
+                writer.Flush();
+                StreamReader reader4C = new(stream, Encoding.UTF8);
+                for (int i=0; i<fileList.Length; i++)
+                {
+                    string proceed = reader4C.ReadLine();
+                    if (proceed == "OK")
+                    {
+                        writer.Write(fileList[i]);
+                        writer.Write("\n");
+                        writer.Flush();
+                    }
+                }             
+                
             }
             client.Close();
         }
@@ -163,7 +182,11 @@ public partial class FileServer : Form
         }
         return blocks;
     }
-   
+    // get local file lists
+    private static string[] GetFiles()
+    {
+        return Directory.GetFiles(".\\asset");
+    }
 }
 
 

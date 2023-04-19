@@ -21,3 +21,4 @@ C:\Users\yehengma\source\repos\Leo-Ma0502\File-Download-Solution-With-Cache\File
 C:\Users\yehengma\source\repos\Leo-Ma0502\File-Download-Solution-With-Cache\FileDownloadWithCache\Client\bin\Debug\net7.0-windows\FileServer.dll
 C:\Users\yehengma\source\repos\Leo-Ma0502\File-Download-Solution-With-Cache\FileDownloadWithCache\Client\bin\Debug\net7.0-windows\FileServer.pdb
 C:\Users\yehengma\source\repos\Leo-Ma0502\File-Download-Solution-With-Cache\FileDownloadWithCache\Client\obj\Debug\net7.0-windows\Client.csproj.CopyComplete
+C:\Users\yehengma\source\repos\Leo-Ma0502\File-Download-Solution-With-Cache\FileDownloadWithCache\Client\obj\Debug\net7.0-windows\Client.Properties.Resources.resources

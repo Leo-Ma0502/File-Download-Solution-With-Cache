@@ -1,6 +1,8 @@
 //client.cs
+using System.Collections;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 
 namespace Client
@@ -11,29 +13,49 @@ namespace Client
         {
             InitializeComponent();
         }
+
         TcpClient client;
-        Dictionary<string, byte[]> cache = new();
-        // greeting
-        private void Greeting(IPAddress ipAddr, int port)
+        readonly Dictionary<string, byte[]> cache = new();
+        private void SetItems()
+        {
+            IPAddress ipAddr = IPAddress.Loopback;
+            int port = 8081;
+            string[] files_available = ReqForFileNames(ipAddr, port);
+            for (int i = 0; i < files_available.Length; i++)
+            {
+                listView1.Items.Add(files_available[i]);
+            }
+        }
+
+        // get file names 
+        private string[] ReqForFileNames(IPAddress ipAddr, int port)
         {
             Console.WriteLine("start client at {0}", DateTime.Now.TimeOfDay);
             client = new(ipAddr.ToString(), port);
 
-            byte command = 0;
+            byte command = 3;
             using NetworkStream stream = client.GetStream();
             stream.WriteByte(command);
             stream.Flush();
-            Console.WriteLine("send greeting at {0}", DateTime.Now.TimeOfDay);
+            Console.WriteLine("send request at {0}", DateTime.Now.TimeOfDay);
 
             StreamReader reader = new(stream, Encoding.UTF8);
+            StreamWriter proceed = new(stream);
 
             // get confirm message from the cache
             string confirm = reader.ReadLine();
             Console.WriteLine("got confirm: {1} at {0}", DateTime.Now.TimeOfDay, confirm);
 
             // get response forwared by cache
-            string response = reader.ReadLine();
-            Console.WriteLine("got response: {1} at {0}", DateTime.Now.TimeOfDay, response);
+            int length_list = int.Parse(reader.ReadLine());
+            string[] fileList = new string[length_list];
+            for (int i = 0; i < length_list; i++)
+            {
+                proceed.Write("OK\n");
+                proceed.Flush();
+                fileList[i] = reader.ReadLine();
+            }
+            return fileList;
         }
         // requesting file download
         private void Request(IPAddress ipAddr, int port, string fileName)
@@ -129,18 +151,6 @@ namespace Client
             stream.Close();
             client.Close();
         }
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-            IPAddress ipAddr = IPAddress.Loopback;
-            int port = 8081;
-            try
-            {
-                Greeting(ipAddr, port);
-            }
-            catch (Exception err) { Console.WriteLine(err.Message); }
-
-        }
         private void button2_Click(object sender, EventArgs e)
         {
             IPAddress ipAddr = IPAddress.Loopback;
@@ -160,6 +170,10 @@ namespace Client
                 Request(ipAddr, port, "test2.bmp");
             }
             catch (Exception err) { Console.WriteLine(err.Message); }
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            SetItems();
         }
     }
 }
