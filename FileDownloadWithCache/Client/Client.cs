@@ -174,8 +174,12 @@ namespace Client
                     int readSize = stream.Read(imageByte, offset, (int)remainingSize);
                     Console.WriteLine("received block");
                     var block_new = new ArraySegment<byte>(imageByte, offset, readSize).ToArray();
-                    cache.Add(Convert.ToBase64String(hash), block_new);
-                    Console.WriteLine("added new block to cache");
+                    string potentialKey = Convert.ToBase64String(hash);
+                    if (!cache.ContainsKey(potentialKey))
+                    {
+                        cache.Add(potentialKey, block_new);
+                        Console.WriteLine("added new block to cache");
+                    }                   
                     remainingSize -= (ulong)readSize;
                     offset += readSize;
                     Console.WriteLine("Ready for next run");
