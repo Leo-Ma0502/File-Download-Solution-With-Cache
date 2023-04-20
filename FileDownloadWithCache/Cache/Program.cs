@@ -12,7 +12,7 @@ namespace Cache
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             Application.Run(new Cache());
-            Cache.HandleRequest();
+            /*Cache.HandleRequest();*/
         }
     }
 }

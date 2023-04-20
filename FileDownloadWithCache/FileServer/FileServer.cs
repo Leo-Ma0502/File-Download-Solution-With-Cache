@@ -7,23 +7,36 @@ namespace FileServer;
 
 public partial class FileServer : Form
 {
+    readonly string[] fileList = GetFiles();
+    string[] availableForClient;
     public FileServer()
     {
         InitializeComponent();
+        var thread = new Thread(StartServing);
+        thread.Start();
+        if (fileList.Length != 0)
+        {
+            for (int i = 0; i < fileList.Length; i++)
+            {
+                listView2.Items.Add(fileList[i][8..]);
+            }
+
+        }
+
     }
-    public static void StartServing()
+    public void StartServing()
     {
         IPAddress ipAddr = IPAddress.Loopback;
         int port = 8082;
         TcpListener listener = new(ipAddr, port);
         listener.Start();
-
         while (true)
         {
-            Console.WriteLine("Server listening on: {0}:{1} at {2}", ipAddr, port, DateTime.Now.TimeOfDay);
+            UpdateLog(string.Format("Server started listening on: {0}:{1} at {2}", ipAddr, port, DateTime.Now.TimeOfDay));
+            Thread.Sleep(1000);
             var client = listener.AcceptTcpClient();
-            Console.WriteLine("cache connected at {0}", DateTime.Now.TimeOfDay);
-
+            UpdateLog(string.Format("cache connected at {0}", DateTime.Now.TimeOfDay));
+            Thread.Sleep(1000);
             // NetworkStream object is used for passing data between client and server
             NetworkStream stream = client.GetStream();
 
@@ -36,14 +49,9 @@ public partial class FileServer : Form
             // 0 is for a greeting message
             if (command == 0)
             {
-                // Create a StreamWriter object to write the message to the stream using UTF-8 encoding
                 StreamWriter writer = new(stream, Encoding.UTF8);
-
-                // Write a string to the stream
                 string greeting = "Hello, client!";
                 writer.Write(greeting);
-
-                // Flush the StreamWriter to ensure that all data is written to the stream
                 writer.Flush();
             }
             else if (command == 1) // command for a image file
@@ -54,13 +62,11 @@ public partial class FileServer : Form
                 data = new byte[fileNameBytesLength];
                 stream.Read(data, 0, fileNameBytesLength);
 
-                // get the path to the file
                 string fileName = Encoding.UTF8.GetString(data);
-                Console.WriteLine("received filename:" + fileName);
+                UpdateLog(string.Format("received filename {0}", fileName));
+                Thread.Sleep(1000);
                 string URL = string.Format(".\\asset\\{0}", fileName);
-                Console.WriteLine("url: " + URL);
 
-                // StreamWriter object is used to send data to the client
                 StreamWriter writer = new(stream);
                 using (Image image = Image.FromFile(URL))
                 {
@@ -70,7 +76,7 @@ public partial class FileServer : Form
                     // send file size first
                     writer.Write("{0}\n", b1.Length);
                     writer.Flush();
-                    Console.WriteLine("Sent total size");
+
                     try
                     {
                         var blocks = GetBlocks(b1, 5, 7, 2048);
@@ -92,7 +98,6 @@ public partial class FileServer : Form
                                     stream.Write(blocks[i], 0, blocks[i].Length);
                                     stream.Flush();
                                     lengthCount += blocks[i].Length;
-                                    Console.WriteLine("sent {0} block(s), total length {1}", i + 1, lengthCount);
                                 }
                             }
                         }
@@ -108,23 +113,30 @@ public partial class FileServer : Form
             else if (command == 3)
             {
                 StreamWriter writer = new(stream, Encoding.UTF8);
-                string[] fileList = GetFiles();
-                writer.Write("{0}\n", fileList.Length);
-                writer.Flush();
-                StreamReader reader4C = new(stream, Encoding.UTF8);
-                for (int i=0; i<fileList.Length; i++)
+                if (availableForClient != null)
                 {
-                    string proceed = reader4C.ReadLine();
-                    if (proceed == "OK")
+                    writer.Write("{0}\n", availableForClient.Length);
+                    writer.Flush();
+                    StreamReader reader4C = new(stream, Encoding.UTF8);
+                    for (int i = 0; i < availableForClient.Length; i++)
                     {
-                        writer.Write(fileList[i]);
-                        writer.Write("\n");
-                        writer.Flush();
+                        string proceed = reader4C.ReadLine();
+                        Console.WriteLine(proceed);
+                        if (proceed == "OK")
+                        {
+                            writer.Write(availableForClient[i]);
+                            writer.Write("\n");
+                            writer.Flush();
+                            Console.WriteLine("sent {0} file names", i + 1);
+                        }
                     }
-                }             
-                
+                }
+                else
+                {
+                    writer.Write("no files available\n");
+                    writer.Flush();
+                }
             }
-            client.Close();
         }
     }
     /*
@@ -185,7 +197,42 @@ public partial class FileServer : Form
     // get local file lists
     private static string[] GetFiles()
     {
-        return Directory.GetFiles(".\\asset");
+        return Directory.GetFiles(".\\asset\\");
+    }
+    private void button1_Click(object sender, EventArgs e)
+    {
+        var thread = new Thread(StartServing);
+        thread.Start();
+    }
+    private void UpdateLog(string text)
+    {
+        // Update the UI with the current count on the UI thread
+        if (textBox1.InvokeRequired)
+        {
+            textBox1.Invoke(new Action(() => textBox1.Text += Environment.NewLine + text));
+        }
+        else
+        {
+            textBox1.Text += Environment.NewLine + text;
+        }
+    }
+
+    private void button1_Click_1(object sender, EventArgs e)
+    {
+        textBox4.Text = "";
+        if (listView2.SelectedItems.Count != 0)
+        {
+            availableForClient = new string[listView2.SelectedItems.Count];
+            for (int i = 0; i < listView2.SelectedItems.Count; i++)
+            {
+                textBox4.Text += string.Format("{1}{0}", listView2.SelectedItems[i].Text, Environment.NewLine);
+                availableForClient[i] = listView2.SelectedItems[i].Text;
+            }
+        }
+        else
+        {
+            textBox4.Text = "No file available";
+        }
     }
 }
 

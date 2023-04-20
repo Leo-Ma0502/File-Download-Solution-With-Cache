@@ -12,7 +12,7 @@ namespace FileServer
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             Application.Run(new FileServer());
-            FileServer.StartServing();
+            /* FileServer.StartServing();*/
         }
     }
 }
