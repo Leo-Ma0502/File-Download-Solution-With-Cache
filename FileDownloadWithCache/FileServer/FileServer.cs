@@ -7,22 +7,14 @@ namespace FileServer;
 
 public partial class FileServer : Form
 {
-    readonly string[] fileList = GetFiles();
+    string[] fileList;
     string[] availableForClient;
     public FileServer()
     {
         InitializeComponent();
         var thread = new Thread(StartServing);
         thread.Start();
-        if (fileList.Length != 0)
-        {
-            for (int i = 0; i < fileList.Length; i++)
-            {
-                listView2.Items.Add(fileList[i][8..]);
-            }
-
-        }
-
+        LoadFileList();
     }
     public void StartServing()
     {
@@ -197,12 +189,22 @@ public partial class FileServer : Form
     // get local file lists
     private static string[] GetFiles()
     {
-        return Directory.GetFiles(".\\asset\\");
-    }
-    private void button1_Click(object sender, EventArgs e)
-    {
-        var thread = new Thread(StartServing);
-        thread.Start();
+        // allow administrator to choose which folder to host
+        string hostingDirec = "..\\..\\";
+        FolderBrowserDialog directory = new()
+        {
+            Description = "please choose the folder to host"
+        };
+        if (directory.ShowDialog() == DialogResult.OK || directory.ShowDialog() == DialogResult.Yes)
+        {
+            if (hostingDirec == "")
+            {
+                throw new InvalidOperationException("Please select the folder");
+            }
+            hostingDirec = directory.SelectedPath;
+            return Directory.GetFiles(hostingDirec);          
+        }
+        return Directory.GetFiles(hostingDirec);
     }
     private void UpdateLog(string text)
     {
@@ -233,6 +235,23 @@ public partial class FileServer : Form
         {
             textBox4.Text = "No file available";
         }
+    }
+    private void LoadFileList()
+    {
+        fileList = GetFiles();
+        if (fileList.Length != 0)
+        {
+            listView2.Items.Clear();
+            for (int i = 0; i < fileList.Length; i++)
+            {
+                listView2.Items.Add(fileList[i].Split("\\")[^1]);
+            }
+        }
+    }
+
+    private void button2_Click(object sender, EventArgs e)
+    {
+        LoadFileList();
     }
 }
 

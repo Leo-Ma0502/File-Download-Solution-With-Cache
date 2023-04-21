@@ -34,6 +34,7 @@ partial class FileServer
         textBox3 = new TextBox();
         button1 = new Button();
         textBox4 = new TextBox();
+        button2 = new Button();
         SuspendLayout();
         // 
         // textBox1
@@ -94,11 +95,22 @@ partial class FileServer
         textBox4.Size = new Size(662, 620);
         textBox4.TabIndex = 9;
         // 
+        // button2
+        // 
+        button2.Location = new Point(467, 25);
+        button2.Name = "button2";
+        button2.Size = new Size(150, 46);
+        button2.TabIndex = 10;
+        button2.Text = "Refresh";
+        button2.UseVisualStyleBackColor = true;
+        button2.Click += button2_Click;
+        // 
         // FileServer
         // 
         AutoScaleDimensions = new SizeF(13F, 32F);
         AutoScaleMode = AutoScaleMode.Font;
         ClientSize = new Size(1648, 1056);
+        Controls.Add(button2);
         Controls.Add(textBox4);
         Controls.Add(button1);
         Controls.Add(textBox3);
@@ -118,4 +130,5 @@ partial class FileServer
     private TextBox textBox3;
     private Button button1;
     private TextBox textBox4;
+    private Button button2;
 }

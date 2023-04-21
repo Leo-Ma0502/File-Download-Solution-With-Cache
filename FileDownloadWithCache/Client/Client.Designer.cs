@@ -56,7 +56,7 @@
             listView1.Location = new Point(12, 102);
             listView1.MultiSelect = false;
             listView1.Name = "listView1";
-            listView1.Size = new Size(662, 898);
+            listView1.Size = new Size(380, 898);
             listView1.TabIndex = 3;
             listView1.UseCompatibleStateImageBehavior = false;
             listView1.View = View.List;
@@ -79,12 +79,12 @@
             textBox1.Name = "textBox1";
             textBox1.ReadOnly = true;
             textBox1.ScrollBars = ScrollBars.Vertical;
-            textBox1.Size = new Size(662, 118);
+            textBox1.Size = new Size(380, 118);
             textBox1.TabIndex = 5;
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(712, 44);
+            textBox2.Location = new Point(433, 40);
             textBox2.Name = "textBox2";
             textBox2.ReadOnly = true;
             textBox2.Size = new Size(240, 39);
@@ -93,16 +93,16 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.Location = new Point(712, 102);
+            pictureBox1.Location = new Point(433, 102);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(1024, 768);
+            pictureBox1.Size = new Size(1303, 1053);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 8;
             pictureBox1.TabStop = false;
             // 
             // button3
             // 
-            button3.Location = new Point(712, 954);
+            button3.Location = new Point(433, 1203);
             button3.Name = "button3";
             button3.Size = new Size(150, 46);
             button3.TabIndex = 9;
@@ -113,7 +113,7 @@
             // 
             // button4
             // 
-            button4.Location = new Point(1586, 954);
+            button4.Location = new Point(1586, 1203);
             button4.Name = "button4";
             button4.Size = new Size(150, 46);
             button4.TabIndex = 10;
@@ -124,9 +124,9 @@
             // 
             // pb1
             // 
-            pb1.Location = new Point(712, 1160);
+            pb1.Location = new Point(433, 1172);
             pb1.Name = "pb1";
-            pb1.Size = new Size(1024, 46);
+            pb1.Size = new Size(1303, 25);
             pb1.TabIndex = 11;
             pb1.Visible = false;
             // 

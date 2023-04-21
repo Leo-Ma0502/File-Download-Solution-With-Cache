@@ -179,7 +179,7 @@ namespace Client
                     {
                         cache.Add(potentialKey, block_new);
                         Console.WriteLine("added new block to cache");
-                    }                   
+                    }
                     remainingSize -= (ulong)readSize;
                     offset += readSize;
                     Console.WriteLine("Ready for next run");
@@ -266,7 +266,7 @@ namespace Client
             else
             {
                 curr_idx -= 1;
-                pictureBox1.Image = images.Images[curr_idx.ToString()];
+                LoadDownloadedImages(curr_idx);
             }
         }
 
@@ -280,7 +280,7 @@ namespace Client
             else
             {
                 curr_idx += 1;
-                pictureBox1.Image = images.Images[curr_idx.ToString()];
+                LoadDownloadedImages(curr_idx);
             }
         }
     }
