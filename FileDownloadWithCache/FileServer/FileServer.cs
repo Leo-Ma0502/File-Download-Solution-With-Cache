@@ -9,6 +9,8 @@ public partial class FileServer : Form
 {
     string[] fileList;
     string[] availableForClient;
+    // allow administrator to choose which folder to host
+    string hostingDirec = "..\\";
     public FileServer()
     {
         InitializeComponent();
@@ -57,8 +59,7 @@ public partial class FileServer : Form
                 string fileName = Encoding.UTF8.GetString(data);
                 UpdateLog(string.Format("received filename {0}", fileName));
                 Thread.Sleep(1000);
-                string URL = string.Format(".\\asset\\{0}", fileName);
-
+                string URL = string.Format("{1}\\{0}", fileName, hostingDirec);
                 StreamWriter writer = new(stream);
                 using (Image image = Image.FromFile(URL))
                 {
@@ -187,10 +188,8 @@ public partial class FileServer : Form
         return blocks;
     }
     // get local file lists
-    private static string[] GetFiles()
-    {
-        // allow administrator to choose which folder to host
-        string hostingDirec = "..\\";
+    private string[] GetFiles()
+    {    
         FolderBrowserDialog directory = new()
         {
             Description = "please choose the folder to host"
