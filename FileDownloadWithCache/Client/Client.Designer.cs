@@ -28,127 +28,133 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button2 = new Button();
-            listView1 = new ListView();
-            button1 = new Button();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            pictureBox1 = new PictureBox();
-            button3 = new Button();
-            button4 = new Button();
-            pb1 = new ProgressBar();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            SuspendLayout();
+            this.button2 = new System.Windows.Forms.Button();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.button1 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.pb1 = new System.Windows.Forms.ProgressBar();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.SuspendLayout();
             // 
             // button2
             // 
-            button2.Location = new Point(12, 1047);
-            button2.Name = "button2";
-            button2.Size = new Size(286, 46);
-            button2.TabIndex = 1;
-            button2.Text = "Download selected file";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
+            this.button2.Location = new System.Drawing.Point(6, 491);
+            this.button2.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(154, 22);
+            this.button2.TabIndex = 1;
+            this.button2.Text = "Download selected file";
+            this.button2.UseVisualStyleBackColor = true;
             // 
             // listView1
             // 
-            listView1.FullRowSelect = true;
-            listView1.Location = new Point(12, 102);
-            listView1.MultiSelect = false;
-            listView1.Name = "listView1";
-            listView1.Size = new Size(380, 898);
-            listView1.TabIndex = 3;
-            listView1.UseCompatibleStateImageBehavior = false;
-            listView1.View = View.List;
-            listView1.SelectedIndexChanged += getSelected;
+            this.listView1.FullRowSelect = true;
+            this.listView1.Location = new System.Drawing.Point(6, 48);
+            this.listView1.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.listView1.MultiSelect = false;
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(206, 423);
+            this.listView1.TabIndex = 3;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.List;
             // 
             // button1
             // 
-            button1.Location = new Point(12, 40);
-            button1.Name = "button1";
-            button1.Size = new Size(380, 46);
-            button1.TabIndex = 4;
-            button1.Text = "Load or reload available files";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            this.button1.Location = new System.Drawing.Point(6, 19);
+            this.button1.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(205, 22);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "Load or reload available files";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(12, 1131);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.ReadOnly = true;
-            textBox1.ScrollBars = ScrollBars.Vertical;
-            textBox1.Size = new Size(380, 118);
-            textBox1.TabIndex = 5;
+            this.textBox1.Location = new System.Drawing.Point(6, 530);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBox1.Size = new System.Drawing.Size(206, 57);
+            this.textBox1.TabIndex = 5;
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(433, 40);
-            textBox2.Name = "textBox2";
-            textBox2.ReadOnly = true;
-            textBox2.Size = new Size(240, 39);
-            textBox2.TabIndex = 7;
-            textBox2.Text = "Downloaded images";
+            this.textBox2.Location = new System.Drawing.Point(233, 19);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.ReadOnly = true;
+            this.textBox2.Size = new System.Drawing.Size(131, 23);
+            this.textBox2.TabIndex = 7;
+            this.textBox2.Text = "Downloaded images";
             // 
             // pictureBox1
             // 
-            pictureBox1.Location = new Point(433, 102);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(1303, 1053);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox1.TabIndex = 8;
-            pictureBox1.TabStop = false;
+            this.pictureBox1.Location = new System.Drawing.Point(233, 48);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(702, 494);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 8;
+            this.pictureBox1.TabStop = false;
             // 
             // button3
             // 
-            button3.Location = new Point(433, 1203);
-            button3.Name = "button3";
-            button3.Size = new Size(150, 46);
-            button3.TabIndex = 9;
-            button3.Text = "Previous";
-            button3.UseVisualStyleBackColor = true;
-            button3.Visible = false;
-            button3.Click += button3_Click_1;
+            this.button3.Location = new System.Drawing.Point(233, 564);
+            this.button3.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(81, 22);
+            this.button3.TabIndex = 9;
+            this.button3.Text = "Previous";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Visible = false;
             // 
             // button4
             // 
-            button4.Location = new Point(1586, 1203);
-            button4.Name = "button4";
-            button4.Size = new Size(150, 46);
-            button4.TabIndex = 10;
-            button4.Text = "Next";
-            button4.UseVisualStyleBackColor = true;
-            button4.Visible = false;
-            button4.Click += button4_Click;
+            this.button4.Location = new System.Drawing.Point(854, 564);
+            this.button4.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(81, 22);
+            this.button4.TabIndex = 10;
+            this.button4.Text = "Next";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Visible = false;
             // 
             // pb1
             // 
-            pb1.Location = new Point(433, 1172);
-            pb1.Name = "pb1";
-            pb1.Size = new Size(1303, 25);
-            pb1.TabIndex = 11;
-            pb1.Visible = false;
+            this.pb1.Location = new System.Drawing.Point(233, 549);
+            this.pb1.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.pb1.Name = "pb1";
+            this.pb1.Size = new System.Drawing.Size(702, 12);
+            this.pb1.TabIndex = 11;
+            this.pb1.Visible = false;
             // 
             // Client
             // 
-            AutoScaleDimensions = new SizeF(13F, 32F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1801, 1300);
-            Controls.Add(pb1);
-            Controls.Add(button4);
-            Controls.Add(button3);
-            Controls.Add(pictureBox1);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
-            Controls.Add(button1);
-            Controls.Add(listView1);
-            Controls.Add(button2);
-            Name = "Client";
-            Text = "Client";
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ResumeLayout(false);
-            PerformLayout();
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(970, 609);
+            this.Controls.Add(this.pb1);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.button2);
+            this.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.Name = "Client";
+            this.Text = "Client";
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion

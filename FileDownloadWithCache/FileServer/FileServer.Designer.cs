@@ -28,99 +28,106 @@ partial class FileServer
     /// </summary>
     private void InitializeComponent()
     {
-        textBox1 = new TextBox();
-        textBox2 = new TextBox();
-        listView2 = new ListView();
-        textBox3 = new TextBox();
-        button1 = new Button();
-        textBox4 = new TextBox();
-        button2 = new Button();
-        SuspendLayout();
-        // 
-        // textBox1
-        // 
-        textBox1.Location = new Point(7, 741);
-        textBox1.Multiline = true;
-        textBox1.Name = "textBox1";
-        textBox1.ScrollBars = ScrollBars.Vertical;
-        textBox1.Size = new Size(1643, 314);
-        textBox1.TabIndex = 1;
-        textBox1.WordWrap = false;
-        // 
-        // textBox2
-        // 
-        textBox2.Location = new Point(911, 25);
-        textBox2.Name = "textBox2";
-        textBox2.ReadOnly = true;
-        textBox2.Size = new Size(269, 39);
-        textBox2.TabIndex = 5;
-        textBox2.Text = "Files available to client";
-        // 
-        // listView2
-        // 
-        listView2.FullRowSelect = true;
-        listView2.Location = new Point(12, 85);
-        listView2.Name = "listView2";
-        listView2.Size = new Size(605, 620);
-        listView2.TabIndex = 6;
-        listView2.UseCompatibleStateImageBehavior = false;
-        listView2.View = View.List;
-        // 
-        // textBox3
-        // 
-        textBox3.Location = new Point(25, 25);
-        textBox3.Name = "textBox3";
-        textBox3.ReadOnly = true;
-        textBox3.Size = new Size(269, 39);
-        textBox3.TabIndex = 7;
-        textBox3.Text = "File in list";
-        // 
-        // button1
-        // 
-        button1.Location = new Point(636, 355);
-        button1.Name = "button1";
-        button1.Size = new Size(249, 46);
-        button1.TabIndex = 8;
-        button1.Text = "make available >>";
-        button1.UseVisualStyleBackColor = true;
-        button1.Click += button1_Click_1;
-        // 
-        // textBox4
-        // 
-        textBox4.Location = new Point(911, 85);
-        textBox4.Multiline = true;
-        textBox4.Name = "textBox4";
-        textBox4.ReadOnly = true;
-        textBox4.ScrollBars = ScrollBars.Vertical;
-        textBox4.Size = new Size(662, 620);
-        textBox4.TabIndex = 9;
-        // 
-        // button2
-        // 
-        button2.Location = new Point(467, 25);
-        button2.Name = "button2";
-        button2.Size = new Size(150, 46);
-        button2.TabIndex = 10;
-        button2.Text = "Refresh";
-        button2.UseVisualStyleBackColor = true;
-        button2.Click += button2_Click;
-        // 
-        // FileServer
-        // 
-        AutoScaleDimensions = new SizeF(13F, 32F);
-        AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(1648, 1056);
-        Controls.Add(button2);
-        Controls.Add(textBox4);
-        Controls.Add(button1);
-        Controls.Add(textBox3);
-        Controls.Add(listView2);
-        Controls.Add(textBox2);
-        Controls.Add(textBox1);
-        Name = "FileServer";
-        Text = "File Server";
-        ResumeLayout(false);
-        PerformLayout();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.listView2 = new System.Windows.Forms.ListView();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(4, 347);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBox1.Size = new System.Drawing.Size(845, 227);
+            this.textBox1.TabIndex = 1;
+            this.textBox1.WordWrap = false;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(491, 12);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.ReadOnly = true;
+            this.textBox2.Size = new System.Drawing.Size(147, 23);
+            this.textBox2.TabIndex = 5;
+            this.textBox2.Text = "Files available to client";
+            // 
+            // listView2
+            // 
+            this.listView2.FullRowSelect = true;
+            this.listView2.Location = new System.Drawing.Point(6, 40);
+            this.listView2.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.listView2.Name = "listView2";
+            this.listView2.Size = new System.Drawing.Size(328, 293);
+            this.listView2.TabIndex = 6;
+            this.listView2.UseCompatibleStateImageBehavior = false;
+            this.listView2.View = System.Windows.Forms.View.List;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(13, 12);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.ReadOnly = true;
+            this.textBox3.Size = new System.Drawing.Size(147, 23);
+            this.textBox3.TabIndex = 7;
+            this.textBox3.Text = "File in list";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(342, 166);
+            this.button1.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(134, 22);
+            this.button1.TabIndex = 8;
+            this.button1.Text = "make available >>";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(491, 40);
+            this.textBox4.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.textBox4.Multiline = true;
+            this.textBox4.Name = "textBox4";
+            this.textBox4.ReadOnly = true;
+            this.textBox4.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBox4.Size = new System.Drawing.Size(358, 293);
+            this.textBox4.TabIndex = 9;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(251, 12);
+            this.button2.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(81, 22);
+            this.button2.TabIndex = 10;
+            this.button2.Text = "Refresh";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // FileServer
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(869, 584);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.listView2);
+            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.textBox1);
+            this.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.Name = "FileServer";
+            this.Text = "File Server";
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
     }
 
     #endregion

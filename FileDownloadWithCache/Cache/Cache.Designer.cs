@@ -28,100 +28,107 @@
         /// </summary>
         private void InitializeComponent()
         {
-            textBox1 = new TextBox();
-            button1 = new Button();
-            textBox2 = new TextBox();
-            textBox3 = new TextBox();
-            listView2 = new ListView();
-            button2 = new Button();
-            textBox4 = new TextBox();
-            SuspendLayout();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.listView2 = new System.Windows.Forms.ListView();
+            this.button2 = new System.Windows.Forms.Button();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.SuspendLayout();
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(4, 754);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.ReadOnly = true;
-            textBox1.ScrollBars = ScrollBars.Vertical;
-            textBox1.Size = new Size(1699, 567);
-            textBox1.TabIndex = 1;
+            this.textBox1.Location = new System.Drawing.Point(2, 353);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBox1.Size = new System.Drawing.Size(917, 268);
+            this.textBox1.TabIndex = 1;
             // 
             // button1
             // 
-            button1.Location = new Point(216, 25);
-            button1.Name = "button1";
-            button1.Size = new Size(150, 46);
-            button1.TabIndex = 2;
-            button1.Text = "Clear Cache";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click_1;
+            this.button1.Location = new System.Drawing.Point(116, 12);
+            this.button1.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(81, 22);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "Clear Cache";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(12, 29);
-            textBox2.Name = "textBox2";
-            textBox2.ReadOnly = true;
-            textBox2.Size = new Size(184, 39);
-            textBox2.TabIndex = 10;
-            textBox2.Text = "Cache contents";
+            this.textBox2.Location = new System.Drawing.Point(6, 14);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.ReadOnly = true;
+            this.textBox2.Size = new System.Drawing.Size(101, 23);
+            this.textBox2.TabIndex = 10;
+            this.textBox2.Text = "Cache contents";
             // 
             // textBox3
             // 
-            textBox3.Location = new Point(12, 709);
-            textBox3.Name = "textBox3";
-            textBox3.ReadOnly = true;
-            textBox3.Size = new Size(184, 39);
-            textBox3.TabIndex = 12;
-            textBox3.Text = "Logs";
+            this.textBox3.Location = new System.Drawing.Point(6, 332);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.ReadOnly = true;
+            this.textBox3.Size = new System.Drawing.Size(101, 23);
+            this.textBox3.TabIndex = 12;
+            this.textBox3.Text = "Logs";
             // 
             // listView2
             // 
-            listView2.FullRowSelect = true;
-            listView2.Location = new Point(12, 86);
-            listView2.MultiSelect = false;
-            listView2.Name = "listView2";
-            listView2.Size = new Size(710, 567);
-            listView2.TabIndex = 13;
-            listView2.UseCompatibleStateImageBehavior = false;
-            listView2.View = View.List;
+            this.listView2.FullRowSelect = true;
+            this.listView2.Location = new System.Drawing.Point(6, 40);
+            this.listView2.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.listView2.MultiSelect = false;
+            this.listView2.Name = "listView2";
+            this.listView2.Size = new System.Drawing.Size(384, 268);
+            this.listView2.TabIndex = 13;
+            this.listView2.UseCompatibleStateImageBehavior = false;
+            this.listView2.View = System.Windows.Forms.View.List;
             // 
             // button2
             // 
-            button2.Location = new Point(784, 22);
-            button2.Name = "button2";
-            button2.Size = new Size(346, 46);
-            button2.TabIndex = 14;
-            button2.Text = "Check selected block content";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
+            this.button2.Location = new System.Drawing.Point(422, 10);
+            this.button2.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(186, 22);
+            this.button2.TabIndex = 14;
+            this.button2.Text = "Check selected block content";
+            this.button2.UseVisualStyleBackColor = true;
             // 
             // textBox4
             // 
-            textBox4.Location = new Point(784, 86);
-            textBox4.Multiline = true;
-            textBox4.Name = "textBox4";
-            textBox4.ReadOnly = true;
-            textBox4.ScrollBars = ScrollBars.Vertical;
-            textBox4.Size = new Size(919, 567);
-            textBox4.TabIndex = 15;
+            this.textBox4.Location = new System.Drawing.Point(422, 40);
+            this.textBox4.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.textBox4.Multiline = true;
+            this.textBox4.Name = "textBox4";
+            this.textBox4.ReadOnly = true;
+            this.textBox4.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBox4.Size = new System.Drawing.Size(497, 268);
+            this.textBox4.TabIndex = 15;
             // 
             // Cache
             // 
-            AutoScaleDimensions = new SizeF(13F, 32F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1715, 1333);
-            Controls.Add(textBox4);
-            Controls.Add(button2);
-            Controls.Add(listView2);
-            Controls.Add(textBox3);
-            Controls.Add(textBox2);
-            Controls.Add(button1);
-            Controls.Add(textBox1);
-            Name = "Cache";
-            Text = "Cache";
-            ResumeLayout(false);
-            PerformLayout();
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(923, 640);
+            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.listView2);
+            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.textBox1);
+            this.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.Name = "Cache";
+            this.Text = "Cache";
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
