@@ -57,6 +57,7 @@
             this.button1.TabIndex = 2;
             this.button1.Text = "Clear Cache";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // textBox2
             // 
@@ -99,6 +100,7 @@
             this.button2.TabIndex = 14;
             this.button2.Text = "Check selected block content";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // textBox4
             // 
