@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\yehengma\\source\\repos\\Leo-Ma0502\\File-Download-Solution-With-Cache\\FileDownloadWithCache\\Cache\\Cache.csproj": {}
+    "C:\\Users\\yma318\\source\\repos\\File-Download-Solution-With-Cache\\FileDownloadWithCache\\Cache\\Cache.csproj": {}
   },
   "projects": {
-    "C:\\Users\\yehengma\\source\\repos\\Leo-Ma0502\\File-Download-Solution-With-Cache\\FileDownloadWithCache\\Cache\\Cache.csproj": {
+    "C:\\Users\\yma318\\source\\repos\\File-Download-Solution-With-Cache\\FileDownloadWithCache\\Cache\\Cache.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\yehengma\\source\\repos\\Leo-Ma0502\\File-Download-Solution-With-Cache\\FileDownloadWithCache\\Cache\\Cache.csproj",
+        "projectUniqueName": "C:\\Users\\yma318\\source\\repos\\File-Download-Solution-With-Cache\\FileDownloadWithCache\\Cache\\Cache.csproj",
         "projectName": "Cache",
-        "projectPath": "C:\\Users\\yehengma\\source\\repos\\Leo-Ma0502\\File-Download-Solution-With-Cache\\FileDownloadWithCache\\Cache\\Cache.csproj",
-        "packagesPath": "C:\\Users\\yehengma\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\yehengma\\source\\repos\\Leo-Ma0502\\File-Download-Solution-With-Cache\\FileDownloadWithCache\\Cache\\obj\\",
+        "projectPath": "C:\\Users\\yma318\\source\\repos\\File-Download-Solution-With-Cache\\FileDownloadWithCache\\Cache\\Cache.csproj",
+        "packagesPath": "C:\\Users\\yma318\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\yma318\\source\\repos\\File-Download-Solution-With-Cache\\FileDownloadWithCache\\Cache\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\yehengma\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\yma318\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -58,7 +62,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }
