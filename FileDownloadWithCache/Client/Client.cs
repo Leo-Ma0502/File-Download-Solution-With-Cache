@@ -2,6 +2,7 @@
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Windows.Forms;
 
 namespace Client
 {
@@ -192,7 +193,7 @@ namespace Client
             MemoryStream ms = new(imageByte, 0, imageByte.Length);
             image = Image.FromStream(ms);
             image.Save(string.Format(".\\asset\\{0}", fileName));
-            images.Images.Add(idx_img.ToString(), new Bitmap(string.Format(".\\asset\\{0}", fileName)));
+            images.Images.Add(idx_img.ToString(), Image.FromFile(string.Format(".\\asset\\{0}", fileName)));
             Console.WriteLine(string.Format("----- Saved {0} -----", fileName));
             reader.Close();
             stream.Close();
@@ -218,16 +219,6 @@ namespace Client
                 MessageBox.Show("No file selected");
             }
         }
-        private void button3_Click(object sender, EventArgs e)
-        {
-            IPAddress ipAddr = IPAddress.Loopback;
-            int port = 8081;
-            try
-            {
-                Request(ipAddr, port, "test2.bmp");
-            }
-            catch (Exception err) { Console.WriteLine(err.Message); }
-        }
         private void button1_Click(object sender, EventArgs e)
         {
             SetItems();
@@ -248,11 +239,17 @@ namespace Client
         }
         private void LoadDownloadedImages(int idx)
         {
+            pictureBox1.Image = null;
             button3.Visible = true;
             button4.Visible = true;
-            if (!images.Images.Empty)
+            if (!images.Images.Empty && idx < images.Images.Count)
             {
-                pictureBox1.Image = images.Images[idx.ToString()];
+                var blurred = images.Images[idx.ToString()];
+                var not_blurred = new Bitmap((int)pictureBox1.Width, (int)pictureBox1.Height);
+                Graphics g = Graphics.FromImage(not_blurred);
+                g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                g.DrawImage(blurred, new Rectangle(Point.Empty, not_blurred.Size));
+                pictureBox1.Image = not_blurred;
             }
         }
 

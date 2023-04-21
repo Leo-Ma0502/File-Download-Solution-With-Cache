@@ -190,7 +190,7 @@ public partial class FileServer : Form
     private static string[] GetFiles()
     {
         // allow administrator to choose which folder to host
-        string hostingDirec = "..\\..\\";
+        string hostingDirec = "..\\";
         FolderBrowserDialog directory = new()
         {
             Description = "please choose the folder to host"
