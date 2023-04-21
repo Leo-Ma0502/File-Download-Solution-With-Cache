@@ -1,4 +1,5 @@
 //client.cs
+using System.Drawing.Drawing2D;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -8,13 +9,11 @@ namespace Client
 {
     public partial class Client : Form
     {
-        ImageList images;
         int count = 0; // used to count the blocks
         int idx_img = 0; // used to index the image
         public Client()
         {
             InitializeComponent();
-            images = new();
         }
 
         TcpClient client;
@@ -193,12 +192,13 @@ namespace Client
             MemoryStream ms = new(imageByte, 0, imageByte.Length);
             image = Image.FromStream(ms);
             image.Save(string.Format(".\\asset\\{0}", fileName));
-            images.Images.Add(idx_img.ToString(), Image.FromFile(string.Format(".\\asset\\{0}", fileName)));
+            var temp = new Bitmap(string.Format(".\\asset\\{0}", fileName));
+            temp.SetResolution(960.0F, 960.0F);
             Console.WriteLine(string.Format("----- Saved {0} -----", fileName));
             reader.Close();
             stream.Close();
             client.Close();
-            LoadDownloadedImages(idx_img);
+            pictureBox1.Image = temp;
             idx_img++;
         }
         private void button2_Click(object sender, EventArgs e)
@@ -235,49 +235,6 @@ namespace Client
             else
             {
                 textBox1.Text = string.Format("Selected: {0}No file selected", Environment.NewLine);
-            }
-        }
-        private void LoadDownloadedImages(int idx)
-        {
-            pictureBox1.Image = null;
-            button3.Visible = true;
-            button4.Visible = true;
-            if (!images.Images.Empty && idx < images.Images.Count)
-            {
-                var blurred = images.Images[idx.ToString()];
-                var not_blurred = new Bitmap((int)pictureBox1.Width, (int)pictureBox1.Height);
-                Graphics g = Graphics.FromImage(not_blurred);
-                g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-                g.DrawImage(blurred, new Rectangle(Point.Empty, not_blurred.Size));
-                pictureBox1.Image = not_blurred;
-            }
-        }
-
-        private void button3_Click_1(object sender, EventArgs e)
-        {
-            int curr_idx = idx_img; // currently displayed image
-            if (curr_idx == 0)
-            {
-                MessageBox.Show("Already the first image");
-            }
-            else
-            {
-                curr_idx -= 1;
-                LoadDownloadedImages(curr_idx);
-            }
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            int curr_idx = idx_img; // currently displayed image
-            if (curr_idx == images.Images.Count - 1)
-            {
-                MessageBox.Show("Already the last image");
-            }
-            else
-            {
-                curr_idx += 1;
-                LoadDownloadedImages(curr_idx);
             }
         }
     }
