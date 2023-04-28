@@ -1,5 +1,5 @@
 What is this:
-a file download app involving cache server:
+a file download app involving cache server.
 
 How does this solution work:
 On server side, admin chooses files to be available for download from local files, which in this context are images. When receiving request forwarded from cache server, it breaks the target file into blocks using Rabin function, and sends them to the cache server.
