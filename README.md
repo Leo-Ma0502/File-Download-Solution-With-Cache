@@ -2,7 +2,7 @@
 
 A file download app involving cache server.
 
-![Client, cache server, and origin server](FileDownloadWithCache/Screenshot/screenshot.PNG)
+![Client, cache server, and origin server](About/Screenshot/screenshot.PNG)
 
 ## How does this solution work:
 
